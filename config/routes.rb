@@ -3,5 +3,6 @@ Rails.application.routes.draw do
   get 'static_pages/home'
   # /static_pages/helpというURLに対するリクエストを、StaticPagesコントローラのhelpアクションと結びつけている
   get 'static_pages/help'
+  get 'static_pages/about'
   root 'application#hello'
 end
