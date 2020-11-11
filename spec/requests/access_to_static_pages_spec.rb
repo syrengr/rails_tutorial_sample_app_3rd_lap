@@ -15,7 +15,7 @@ RSpec.describe "Access to static_pages", type: :request do
       # 200レスポンスが返却されていることを確認する
       expect(response).to have_http_status 200
       # 文字列を含むレスポンスを返していることを確認する
-      expect(response.body).to include "Home | Ruby on Rails Tutorial Sample App"
+      expect(response.body).to include "title", "Ruby on Rails Tutorial Sample App"
     end
 
     it "should get help" do
@@ -24,7 +24,7 @@ RSpec.describe "Access to static_pages", type: :request do
       # 200レスポンスが返却されていることを確認する
       expect(response).to have_http_status 200
       # 文字列を含むレスポンスを返していることを確認する
-      expect(response.body).to include "Help | Ruby on Rails Tutorial Sample App"
+      expect(response.body).to include "title", "Ruby on Rails Tutorial Sample App"
     end
 
     it "should get about" do
@@ -33,7 +33,7 @@ RSpec.describe "Access to static_pages", type: :request do
       # 200レスポンスが返却されていることを確認する
       expect(response).to have_http_status 200
       # 文字列を含むレスポンスを返していることを確認する
-      expect(response.body).to include "About | Ruby on Rails Tutorial Sample App"
+      expect(response.body).to include "title", "Ruby on Rails Tutorial Sample App"
     end
 
     it "should get contact" do
@@ -42,7 +42,7 @@ RSpec.describe "Access to static_pages", type: :request do
       # 200レスポンスが返却されていることを確認する
       expect(response).to have_http_status 200
       # 文字列を含むレスポンスを返していることを確認する
-      expect(response.body).to include "Contact | Ruby on Rails Tutorial Sample App"
+      expect(response.body).to include "title", "Ruby on Rails Tutorial Sample App"
     end
   end
 end
