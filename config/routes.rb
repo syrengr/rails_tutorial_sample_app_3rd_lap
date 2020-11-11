@@ -1,12 +1,10 @@
 Rails.application.routes.draw do
   # ルート「/」へのGETリクエストがStaticPagesコントローラのhomeアクションにルーティングされる
   root 'static_pages#home'
-  # /static_pages/homeというURLに対するリクエストを、StaticPagesコントローラのhomeアクションと結びつけている
-  get 'static_pages/home'
-  # /static_pages/helpというURLに対するリクエストを、StaticPagesコントローラのhelpアクションと結びつけている
-  get 'static_pages/help'
-  # /static_pages/aboutというURLに対するリクエストを、StaticPagesコントローラのaboutアクションと結びつけている
-  get 'static_pages/about'
-  # /static_pages/contactというURLに対するリクエストを、StaticPagesコントローラのcontactアクションと結びつけている
-  get 'static_pages/contact'
+  # GETリクエストが /help に送信されたときにStaticPagesコントローラーのhelpアクションを呼び出す
+  get '/help', to: 'static_pages#help'
+  # GETリクエストが /about に送信されたときにStaticPagesコントローラーのaboutアクションを呼び出す
+  get '/about', to: 'static_pages#about'
+  # GETリクエストが /help に送信されたときにStaticPagesコントローラーのcontactアクションを呼び出す
+  get '/contact', to: 'static_pages#contact'
 end

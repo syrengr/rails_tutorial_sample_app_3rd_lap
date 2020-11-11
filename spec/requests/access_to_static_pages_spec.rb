@@ -4,23 +4,14 @@ RSpec.describe "Access to static_pages", type: :request do
   context "Access to static pages" do
     it "should get root" do
       # アクションをgetして正常に動作することを確認する
-      get root_url
+      get root_path
       # 200レスポンスが返却されていることを確認する
       expect(response).to have_http_status 200
-    end
-
-    it "should get home" do
-      # アクションをgetして正常に動作することを確認する
-      get static_pages_home_url
-      # 200レスポンスが返却されていることを確認する
-      expect(response).to have_http_status 200
-      # 文字列を含むレスポンスを返していることを確認する
-      expect(response.body).to include "title", "Ruby on Rails Tutorial Sample App"
     end
 
     it "should get help" do
       # アクションをgetして正常に動作することを確認する
-      get static_pages_help_url
+      get help_path
       # 200レスポンスが返却されていることを確認する
       expect(response).to have_http_status 200
       # 文字列を含むレスポンスを返していることを確認する
@@ -29,7 +20,7 @@ RSpec.describe "Access to static_pages", type: :request do
 
     it "should get about" do
       # アクションをgetして正常に動作することを確認する
-      get static_pages_about_url
+      get about_path
       # 200レスポンスが返却されていることを確認する
       expect(response).to have_http_status 200
       # 文字列を含むレスポンスを返していることを確認する
@@ -38,7 +29,7 @@ RSpec.describe "Access to static_pages", type: :request do
 
     it "should get contact" do
       # アクションをgetして正常に動作することを確認する
-      get static_pages_contact_url
+      get contact_path
       # 200レスポンスが返却されていることを確認する
       expect(response).to have_http_status 200
       # 文字列を含むレスポンスを返していることを確認する
