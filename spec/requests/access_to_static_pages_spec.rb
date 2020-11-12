@@ -1,7 +1,10 @@
 require "rails_helper"
 
+# タイトルの引用元：Rails チュートリアル（３章、４章、５章）をRSpecでテスト
 RSpec.describe "Access to static_pages", type: :request do
+  # タイトルの引用元：Rails チュートリアル（３章、４章、５章）をRSpecでテスト
   context "Access to static pages" do
+    # タイトルの引用元：Rails Tutorial
     it "should get root" do
       # アクションをgetして正常に動作することを確認する
       get root_path
@@ -9,6 +12,7 @@ RSpec.describe "Access to static_pages", type: :request do
       expect(response).to have_http_status 200
     end
 
+    # タイトルの引用元：Rails Tutorial
     it "should get help" do
       # アクションをgetして正常に動作することを確認する
       get help_path
@@ -18,6 +22,7 @@ RSpec.describe "Access to static_pages", type: :request do
       expect(response.body).to include "title", "Ruby on Rails Tutorial Sample App"
     end
 
+    # タイトルの引用元：Rails Tutorial
     it "should get about" do
       # アクションをgetして正常に動作することを確認する
       get about_path
@@ -27,6 +32,7 @@ RSpec.describe "Access to static_pages", type: :request do
       expect(response.body).to include "title", "Ruby on Rails Tutorial Sample App"
     end
 
+    # タイトルの引用元：Rails Tutorial
     it "should get contact" do
       # アクションをgetして正常に動作することを確認する
       get contact_path

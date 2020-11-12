@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-gem 'rails',        '5.1.6'
+gem 'rails',        '5.4.0'
 gem 'bootstrap-sass', '3.3.7'
 gem 'puma',         '3.9.1'
 gem 'sass-rails',   '5.0.6'
@@ -14,7 +14,11 @@ group :development, :test do
   gem 'sqlite3', '1.3.13'
   gem 'byebug',  '9.0.6', platform: :mri
   # テストフレームワーク
-  gem 'rspec-rails', '~> 3.8'
+  gem 'rspec-rails', '~> 3.7'
+  # UIテストのためのRubyフレームワーク
+  gem 'capybara', '~> 2.18'
+  # Capybaraが利用するドライバを任意に追加する
+  gem 'selenium-webdriver', '~> 3.11'
 end
 
 group :development do
