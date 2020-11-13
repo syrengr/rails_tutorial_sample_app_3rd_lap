@@ -13,12 +13,14 @@ gem 'jbuilder',     '2.7.0'
 group :development, :test do
   gem 'sqlite3', '1.3.13'
   gem 'byebug',  '9.0.6', platform: :mri
+  # UIテストフレームワーク（初期設定のGemfileから引用）
+  gem 'capybara', '>= 2.15'
+  # Webブラウザをプログラムから自動的に操作するためのツール（初期設定のGemfileから引用）
+  gem 'selenium-webdriver'
+  # ブラウザを操作するライブラリ
+  gem 'webdrivers', '~> 4.0'
   # テストフレームワーク
   gem 'rspec-rails', '~> 3.7'
-  # UIテストのためのRubyフレームワーク
-  gem 'capybara', '~> 2.18'
-  # Capybaraが利用するドライバを任意に追加する
-  gem 'selenium-webdriver', '~> 3.11'
 end
 
 group :development do
@@ -33,7 +35,7 @@ group :test do
   gem 'minitest',                 '5.10.3'
   gem 'minitest-reporters',       '1.1.14'
   gem 'guard',                    '2.16.2'
-  gem 'guard-minitest',           '2.4.4'
+  gem 'guard-minitest',           '2.4.4'  
 end
 
 group :production do
