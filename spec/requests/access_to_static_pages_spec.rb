@@ -5,11 +5,16 @@ RSpec.describe "Access to static_pages", type: :request do
   # タイトルの引用元：Rails チュートリアル（３章、４章、５章）をRSpecでテスト
   context "Access to static pages" do
     # タイトルの引用元：Rails Tutorial
-    it "should get root" do
+    it "should get home" do
       # アクションをgetして正常に動作することを確認する
       get root_path
       # 200レスポンスが返却されていることを確認する
       expect(response).to have_http_status 200
+    end
+    # タイトルの引用元：Rails チュートリアル（３章、４章、５章）をRSpecでテスト
+    it "has title 'Ruby on Rails Tutorial Sample App'" do
+      expect(response.body).to include full_title("")
+      expect(response.body).to_not include "| Ruby on Rails Tutorial Sample App"
     end
 
     # タイトルの引用元：Rails Tutorial
@@ -19,7 +24,7 @@ RSpec.describe "Access to static_pages", type: :request do
       # 200レスポンスが返却されていることを確認する
       expect(response).to have_http_status 200
       # 文字列を含むレスポンスを返していることを確認する
-      expect(response.body).to include "title", "Ruby on Rails Tutorial Sample App"
+      expect(response.body).to include full_title("Help")
     end
 
     # タイトルの引用元：Rails Tutorial
@@ -29,7 +34,7 @@ RSpec.describe "Access to static_pages", type: :request do
       # 200レスポンスが返却されていることを確認する
       expect(response).to have_http_status 200
       # 文字列を含むレスポンスを返していることを確認する
-      expect(response.body).to include "title", "Ruby on Rails Tutorial Sample App"
+      expect(response.body).to include full_title("About")
     end
 
     # タイトルの引用元：Rails Tutorial
@@ -39,7 +44,7 @@ RSpec.describe "Access to static_pages", type: :request do
       # 200レスポンスが返却されていることを確認する
       expect(response).to have_http_status 200
       # 文字列を含むレスポンスを返していることを確認する
-      expect(response.body).to include "title", "Ruby on Rails Tutorial Sample App"
+      expect(response.body).to include full_title("Contact")
     end
   end
 end
