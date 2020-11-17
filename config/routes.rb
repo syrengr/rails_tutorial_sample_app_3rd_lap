@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get 'users/new'
+
   # ルート「/」へのGETリクエストがStaticPagesコントローラのhomeアクションにルーティングされる
   root 'static_pages#home'
   # GETリクエストが /help に送信されたときにStaticPagesコントローラのhelpアクションを呼び出す
