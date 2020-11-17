@@ -20,6 +20,8 @@ RSpec.describe "site layout", type: :system do
       is_expected.to have_link "About", href: about_path
       # Contactページへのリンクが存在しているか確かめる
       is_expected.to have_link "Contact", href: contact_path
+      # Sigun upページへのリンクが存在しているか確かめる
+      is_expected.to have_link "Sign up now!", href: signup_path
     end
   end
 end
