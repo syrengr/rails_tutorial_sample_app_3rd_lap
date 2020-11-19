@@ -1,6 +1,7 @@
 source 'https://rubygems.org'
 
 gem 'rails',        '5.1.6'
+gem 'bcrypt',       '3.1.12'
 gem 'bootstrap-sass', '3.3.7'
 gem 'puma',         '3.9.1'
 gem 'sass-rails',   '5.0.6'
@@ -21,6 +22,10 @@ group :development, :test do
   gem 'webdrivers', '~> 4.0'
   # テストフレームワーク
   gem 'rspec-rails', '~> 3.7'
+  # テストデータ作成用ツール
+  gem 'factory_bot_rails'
+  # バリデーションテスト用ツール
+  gem 'shoulda-matchers'
 end
 
 group :development do

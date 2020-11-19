@@ -64,3 +64,15 @@ end
 
 # full_titleヘルパーを使用するために追加
 include ApplicationHelper
+
+# Shoulda-Matchersの設定
+# Shoulda-Matchersを使用すると、簡潔かつ直感的にテストを書けるようになる
+Shoulda::Matchers.configure do |config|
+  config.integrate do |with|
+    with.test_framework :rspec
+    with.library :rails
+  end
+end
+
+# factory_bot.rbを読み込む
+require 'support/factory_bot'
