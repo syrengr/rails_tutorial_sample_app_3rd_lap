@@ -1,6 +1,4 @@
 Rails.application.routes.draw do
-  get 'users/new'
-
   # ルート「/」へのGETリクエストがStaticPagesコントローラのhomeアクションにルーティングされる
   root 'static_pages#home'
   # GETリクエストが /help に送信されたときにStaticPagesコントローラのhelpアクションを呼び出す
@@ -11,4 +9,6 @@ Rails.application.routes.draw do
   get '/contact', to: 'static_pages#contact'
   # GETリクエストが /signup に送信されたときにUsersコントローラのnewアクションを呼び出す
   get 'signup', to: 'users#new'
+  # HTTP標準を装備している
+  resources :users
 end
