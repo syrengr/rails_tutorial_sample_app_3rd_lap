@@ -9,6 +9,8 @@ Rails.application.routes.draw do
   get '/contact', to: 'static_pages#contact'
   # GETリクエストが /signup に送信されたときにUsersコントローラのnewアクションを呼び出す
   get 'signup', to: 'users#new'
+  # GETリクエストが /create に送信されたときにUsersコントローラのsignupアクションを呼び出す
+  post 'signup', to: 'users#create'
   # HTTP標準を装備している
   resources :users
 end
