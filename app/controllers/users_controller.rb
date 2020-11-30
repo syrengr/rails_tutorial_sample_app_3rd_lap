@@ -22,7 +22,7 @@ class UsersController < ApplicationController
       # フラッシュメッセージを追加する
       flash[:success] = "Welcome to the Sapmle App!"
       # 新しく作成されたuserのプロフィールページにリダイレクトする
-      # redirect_to @user
+      redirect_to @user
     else
       # newをレンダリングさせる
       render 'new'
