@@ -2,7 +2,7 @@
 require "rails_helper"
 
 # タイトルの引用元：Rails チュートリアル（３章、４章、５章）をRSpecでテスト
-RSpec.describe "Access to static_pages", type: :request do
+RSpec.describe "access to static_pages", type: :request do
   # タイトルの引用元：Rails チュートリアル（３章、４章、５章）をRSpecでテスト
   context "GET #home" do
     # アクションをgetして正常に動作することを検証する
@@ -52,20 +52,4 @@ RSpec.describe "Access to static_pages", type: :request do
       expect(response.body).to include full_title("About")
     end
   end
-
-  # # タイトルの引用元：Rails チュートリアル（３章、４章、５章）をRSpecでテスト
-  # context "GET #contact" do
-  #   # アクションをgetして正常に動作することを検証する
-  #   before { contact_path }
-  #   # タイトルの引用元：Rails Tutorial
-  #   it "should get contact" do
-  #     # 200レスポンスが返却されていることを検証する
-  #     expect(response).to have_http_status 200
-  #   end
-  #   # タイトルの引用元：Rails チュートリアル（３章、４章、５章）をRSpecでテスト
-  #   it "has title 'Contact | Ruby on Rails Tutorial Sample App'" do
-  #     # レスポンスにApplicationHelperのfull_titileメソッドと引数が含まれていることを検証する
-  #     expect(response.body).to include full_title("Contact")
-  #   end
-  # end
 end

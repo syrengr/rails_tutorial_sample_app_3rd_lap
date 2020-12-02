@@ -1,3 +1,4 @@
+# rails_helperを読み込む
 require "rails_helper"
 
 # タイトルの引用元：Rails チュートリアル（３章、４章、５章）をRSpecでテスト
