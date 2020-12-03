@@ -1,4 +1,6 @@
 class User < ApplicationRecord
+  # 仮想の属性を作成する
+  attr_accessor :remember_token
   # userをDBに保存する前に、email属性を強制的に小文字に変換する
   before_save { email.downcase! }
   
@@ -25,5 +27,33 @@ class User < ApplicationRecord
     cost = ActiveModel::SecurePassword.min_cost ? BCrypt::Engine::MIN_COST : BCrypt::Engine.cost
     # パスワードを生成する
     BCrypt::Password.create(string, cost: cost)
+  end
+
+  # ランダムなトークンを返す
+  def User.new_token
+    # 長さ22のランダムな文字列を返す
+    SecureRandom.urlsafe_base64
+  end
+
+  # 永続セッションのためにuserをDBに記憶する
+  def remember
+    # remember_token遠いう名前のローカル変数を作成しないように、selfキーワードを与え、記憶トークン（ブラウザを閉じてもログイン情報を記憶している）を作成する
+    self.remember_token = User.new_token
+    # update_attributeメソッド（バリデーションを素通りさせる）を使って記憶ダイジェストを更新する）
+    update_attribute(:remember_digest, User.digest(remember_token))
+  end
+
+  # 渡されたトークンがダイジェストと一致したらtrueを返す
+  def authenticated?(remember_token)
+    # ダイジェストがnilの場合はfalseを返す
+    return false if remember_digest.nil?
+    # 渡されたトークンがuserの記憶ダイジェストと一致することを確認する
+    BCrypt::Password.new(remember_digest).is_password?(remember_token)
+  end
+
+  # userのlogin情報を破棄する
+  def forget
+    # userを忘れる
+    update_attribute(:remember_digest, nil)
   end
 end

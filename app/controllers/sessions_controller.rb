@@ -11,6 +11,8 @@ class SessionsController < ApplicationController
     if user && user.authenticate(params[:session][:password])
       # userのloginを行いセッションのcreateアクションを完了する
       log_in user
+      # loginしてuserを保存する
+      remember user
       # userのプロフィールページにリダイレクトする
       redirect_to user
     else
@@ -23,8 +25,8 @@ class SessionsController < ApplicationController
 
   # 削除
   def destroy
-    # logoutする
-    log_out
+    # 別のタブまたはウィンドウでlogin中の場合のみ、logoutする
+    log_out if logged_in?
     # トップページへリダイレクトする
     redirect_to root_url
   end
