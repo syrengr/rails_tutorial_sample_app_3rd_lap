@@ -16,7 +16,7 @@ RSpec.describe "site layout", type: :system do
       # Helpページへのリンクが存在しているか確かめる
       is_expected.to have_link "Help", href: help_path
       # Log inページへのリンクが存在しているか確かめる
-      is_expected.to have_link "Log in", href: root_path
+      is_expected.to have_link "Log in", href: login_path
       # Aboutページへのリンクが存在しているか確かめる
       is_expected.to have_link "About", href: about_path
       # Contactページへのリンクが存在しているか確かめる

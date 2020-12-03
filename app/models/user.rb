@@ -18,4 +18,12 @@ class User < ApplicationRecord
   has_secure_password
   # passwordの存在性を検証し、最小文字数を検証する（minimumで最小文字数を制限できる）
   validates :password, presence: true, length: { minimum: 6 }
+
+  # 渡された文字列のハッシュ値を返す
+  def User.digest(string)
+    # secure_passwordのソースコード
+    cost = ActiveModel::SecurePassword.min_cost ? BCrypt::Engine::MIN_COST : BCrypt::Engine.cost
+    # パスワードを生成する
+    BCrypt::Password.create(string, cost: cost)
+  end
 end

@@ -1,7 +1,9 @@
 class SessionsController < ApplicationController
+  # 新規
   def new
   end
 
+  # 作成
   def create
     # downcaseメソッドを使って有効なemailが入力されたときに確実にマッチするように設定し、userをDBから見つけて検証する
     user = User.find_by(email: params[:session][:email].downcase)
@@ -19,6 +21,11 @@ class SessionsController < ApplicationController
     end
   end
 
+  # 削除
   def destroy
+    # logoutする
+    log_out
+    # トップページへリダイレクトする
+    redirect_to root_url
   end
 end

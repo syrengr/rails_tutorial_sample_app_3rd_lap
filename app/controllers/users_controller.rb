@@ -18,6 +18,8 @@ class UsersController < ApplicationController
     @user = User.new(user_params)
     # 保存に成功した場合の処理
     if @user.save
+      # user登録中にloginする
+      log_in @user
       # 保存に失敗した場合の処理
       # フラッシュメッセージを追加する
       flash[:success] = "Welcome to the Sapmle App!"
