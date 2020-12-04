@@ -16,7 +16,7 @@ module SessionsHelper
     cookies.permanent[:remember_token] = user.remember_token
   end
 
-  # 現在ログイン中のuserを返す（いる場合）
+  # 現在login中のuserを返す（いる場合）
   def current_user
     # session[:user_id]が存在する場合の処理
     if (user_id = session[:user_id])

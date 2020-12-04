@@ -18,8 +18,9 @@ class User < ApplicationRecord
 
   # userがセキュアなパスワードを持っているようにする
   has_secure_password
-  # passwordの存在性を検証し、最小文字数を検証する（minimumで最小文字数を制限できる）
-  validates :password, presence: true, length: { minimum: 6 }
+  # passwordの存在性を検証し、最小文字数を検証するためにminimumで最小文字数を制限する
+  # allow_nil: trueオプションを追加することで、パスワードのバリデーションに対して空の時は例外処理を加えられる
+  validates :password, presence: true, length: { minimum: 6 }, allow_nil: true
 
   # 渡された文字列のハッシュ値を返す
   def User.digest(string)
