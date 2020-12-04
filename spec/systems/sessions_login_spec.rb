@@ -1,8 +1,6 @@
 # rails_helperを読み込む
 require "rails_helper"
 
-# フラッシュメッセージの残留をキャッチするテスト
-
 # タイトルの引用元：Rails チュートリアル（8章）をRSpecでテスト
 RSpec.describe "sessions", type: :system do
   # 前処理
@@ -39,7 +37,7 @@ RSpec.describe "sessions", type: :system do
       # Log out
       is_expected.to have_link "Log out", href: logout_path
     end
-    # logoutのテスト
+    # logoutリンクのテスト
     it "log out after log in" do
       # ボタンへのクリックをシュミレートする
       click_link "Account"
@@ -85,8 +83,34 @@ RSpec.describe "sessions", type: :system do
       # フラッシュメッセージが消える
       it "is flash disappear" do
         # have_selectorのtextオプションでコンテンツ内容がマッチしていないと検証する
-        # is_expected.to_not have_selector(".alert-danger", text: "Invalid email/password combination")
+        is_expected.to_not have_selector(".alert-danger", text: "Invalid email/password combination")
       end
+    end
+  end
+
+  # [remember me]チェックボックスのテスト
+  describe "remember me" do
+    # userを定義する
+    let!(:user) do
+      # nameからpassword_confirmationのバリューをuserキーに代入する
+      create(:user, name:                  "ORIGINAL",
+                    email:                 "ORIGINAL@EXAMPLE.COM",
+                    password:              "password",
+                    password_confirmation: "password" )
+    end
+    # userがチェックボックスにチェックをしたときの挙動を検証する
+    it "remembers the cookie when user checks the Remember Me box" do
+      # log_in_asメソッドの引数に1渡す
+      # log_in_as(user, remember_me: '1')
+      # cookiesのremember_tokenの値がnilではないことを期待する
+      # expect(cookies[:remember_token]).not_to eq nil
+    end
+    # userがチェックボックスにチェックをしなかったときの挙動を検証する
+    it "does not remembers the cookie when user does not checks the Remember Me box" do
+      # log_in_asメソッドの引数に0渡す
+      # log_in_as(user, remember_me: "0")
+      # cookiesのremember_tokenの値がnilであることを期待する
+      # expect(cookies[:remember_token]).to eq nil
     end
   end
 end

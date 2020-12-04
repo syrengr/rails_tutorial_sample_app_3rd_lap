@@ -1,5 +1,5 @@
 # rails_helperを読み込む
-require 'rails_helper'
+require "rails_helper"
 
 # Rails Tutorial以外のタイトルの引用元：Rails チュートリアル（３章、４章、５章）をRSpecでテスト
 RSpec.describe User, type: :model do
@@ -85,5 +85,22 @@ RSpec.describe User, type: :model do
     end
     # passwordの長さを検証する（適正値は6）
     it { is_expected.to validate_length_of(:password).is_at_least(6) }
+  end
+
+  # ダイジェストのテスト
+  describe "digest" do
+    # userを定義する
+    let!(:user) do
+      # nameからpassword_confirmationのバリューをuserキーに代入する
+      create(:user, name:                  "ORIGINAL",
+                    email:                 "ORIGINAL@EXAMPLE.COM",
+                    password:              "password",
+                    password_confirmation: "password" )
+    end
+    # ダイジェストが存在しない場合のauthenticated?の挙動を検証する
+    it "digest does not exist" do
+      # 渡されたトークンがダイジェストと一致しない場合はfalsyを返すことを期待する
+      expect(user.authenticated?("")).to be_falsy
+    end
   end
 end

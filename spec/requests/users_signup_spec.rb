@@ -31,7 +31,7 @@ RSpec.describe "POST #create" do
   context "invalid user" do
     # user_paramsを定義する
     let(:user_params) do
-      # nameからpassword_confirmationのバリューをuserキーとparamsに代入し、usersにpostメソッドで登録する
+      # nameからpassword_confirmationのバリューをuserキーとparamsに代入する
       attributes_for(:user, name:                  "",
                             email:                 "user@invalid",
                             password:              "foo",
