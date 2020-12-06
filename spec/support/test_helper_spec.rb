@@ -18,8 +18,20 @@ module TestHelper
   end
 end
 
-# rails_helperを読み込む
-require "rails_helper"
+# moduleの引用元：RailsチュートリアルのテストをRspecで書いてみた[第10章]
+module SystemHelper
+  # 編集の失敗に対するテスト用メソッド
+  def login_as(user)
+    # loginページを開く
+    visit login_path
+    # Emailフォームへの入力をシュミレートする
+    fill_in "Email",    with: user.email
+    # Passwordフォームへの入力をシュミレートする
+    fill_in "Password", with: user.password
+    # Log inボタンへのクリックをシュミレートする
+    click_button "Log in"
+  end
+end
 
 # 永続セッションのテスト
 RSpec.describe SessionsHelper, type: :helper do
@@ -55,21 +67,6 @@ RSpec.describe SessionsHelper, type: :helper do
       # 現在のuserがnilになることを期待する
       expect(current_user).to eq nil
     end
-  end
-end
-
-# moduleの引用元：RailsチュートリアルのテストをRspecで書いてみた[第10章]
-module SystemHelper
-  # 編集の失敗に対するテスト用メソッド
-  def login_as(user)
-    # loginページを開く
-    visit login_path
-    # Emailフォームへの入力をシュミレートする
-    fill_in "Email",    with: user.email
-    # Passwordフォームへの入力をシュミレートする
-    fill_in "Password", with: user.password
-    # Log inボタンへのクリックをシュミレートする
-    click_button "Log in"
   end
 end
 
