@@ -14,7 +14,7 @@ class SessionsController < ApplicationController
       # loginしてuserを保存し、[remember_me]チェックボックスの痩身結果を処理する
       params[:session][:remember_me] == "1" ? remember(@user) : forget(@user)
       # userのプロフィールページにリダイレクトする
-      redirect_to @user
+      redirect_back_or @user
     else
       # login失敗時の処理
       flash.now[:danger] = "Invalid email/password combination"

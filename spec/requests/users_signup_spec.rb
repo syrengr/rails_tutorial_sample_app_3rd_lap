@@ -47,4 +47,33 @@ RSpec.describe "POST #create" do
       end.to change(User, :count).by(0)
     end
   end
+
+  # テストuserでloginする
+  describe "PATH/users/:id" do
+    # userファクトリを作成する
+    let(:user) { FactoryBot.create(:user) }
+    # 前処理としてlog_in_as(user)を呼び出す
+    # before { log_in_as(user) }
+    # 更新に失敗する
+    it "fails edit with wrong information" do
+      # user情報を更新する
+      patch user_path(user), params: { user: {　name: " ",
+                                                email: "foo@invalid",
+                                                password: "foo",
+                                                password_confirmation: "bar" }}
+      # 200 statu codeが返されることを期待する
+      # expect(response).to have_http_status(200)
+    end
+
+    # 更新に成功する
+    it "succeeds edit with correct information" do
+      # user情報を更新する
+      patch user_path(user), params: { user: {　name: "Foo Bar",
+                                                email: "foo@invalid",
+                                                password: "",
+                                                password_confirmation: "" }}
+      # userページへリダイレクトされることを期待する
+      # expect(response).to redirect_to user_path(user)
+    end
+  end
 end

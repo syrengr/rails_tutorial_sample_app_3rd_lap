@@ -33,6 +33,11 @@ module SystemHelper
   end
 end
 
+RSpec.configure do |config|
+  config.include TestHelper
+  config.include SystemHelper
+end
+
 # 永続セッションのテスト
 RSpec.describe SessionsHelper, type: :helper do
   # TestHelperを読み込む
@@ -70,10 +75,11 @@ RSpec.describe SessionsHelper, type: :helper do
   end
 end
 
-# 編集の失敗に対するテスト
+# 編集の失敗と成功に対するテスト
 RSpec.describe "UsersEdits", type: :system do
   # SystemHelperを読み込む
   include SystemHelper
+
   # userを定義する
   let!(:user) do
     # nameからpassword_confirmationのバリューをuserキーに代入する
@@ -82,24 +88,57 @@ RSpec.describe "UsersEdits", type: :system do
                   password:              "password",
                   password_confirmation: "password" )
   end
-  # Capybaraではitの代わりにscenarioを使う
-  scenario "it fails esit with wrong information" do
-    # 編集の失敗に対するテスト用メソッドを呼び出す
-    login_as(user)
-    # ボタンへのクリックをシュミレートする
-    # click_on "Setting"
-    # fill_inメソッドでフォームへの入力をシュミレートする
-    # Nameフォームへの入力
-    # fill_in "Name",                   with: ""
-    # Emailフォームへの入力
-    # fill_in "Email",                  with: "testuser@example.com"
-    # Passwordフォームへの入力
-    # fill_in "Password",               with: ""
-    # Confirmationフォームへの入力
-    # fill_in "Confirmation",           with: ""
-    # ボタンへのクリックをシュミレートする
-    # click_on "Save changes"
-    # 正しい数のエラーメッセージが表示されているかテスト
-    # is_expected.to have_selector("The form contains 4 errors.")
-  end
+
+  # # 編集の失敗に対するテスト
+  # # Capybaraではitの代わりにscenarioを使う
+  # scenario "it fails esit with wrong information" do
+  #   # 編集の失敗に対するテスト用メソッドを呼び出す
+  #   login_as(user)
+  #   # ボタンへのクリックをシュミレートする
+  #   click_on "Setting"
+  #   # fill_inメソッドでフォームへの入力をシュミレートする
+  #   # Nameフォームへの入力
+  #   fill_in "Name",                   with: ""
+  #   # Emailフォームへの入力
+  #   fill_in "Email",                  with: "testuser@example.com"
+  #   # Passwordフォームへの入力
+  #   fill_in "Password",               with: ""
+  #   # Confirmationフォームへの入力
+  #   fill_in "Confirmation",           with: ""
+  #   # ボタンへのクリックをシュミレートする
+  #   click_on "Save changes"
+  #   # 正しい数のエラーメッセージが表示されているかテスト
+  #   is_expected.to have_selector("The form contains 4 errors.")
+
+  #   # 正しい数のエラーが表示されているか検証する
+  #   aggregate_failures do
+  #     # 現在いる場所とuserがいる場所が一致することを期待する
+  #     expect(current_path).to eq user_path(user)
+  #     # エラーが表示されることを期待する
+  #     expect(has_css?(".alert-danger")).to be_truthy
+  #   end
+  # end
+
+  # # 編集の成功に対するテスト
+  # scenario "it succeeds edit with correct information" do
+  #   # fill_inメソッドでフォームへの入力をシュミレートする
+  #   # Nameフォームへの入力
+  #   fill_in "Name",                     with: "Foo Bar"
+  #   # Emailフォームへの入力
+  #   fill_in "Email",                    with: "foo@bar.com"
+  #   # Passwordフォームへの入力
+  #   fill_in "Password",                 with: ""
+  #   # Confirmationフォームへの入力
+  #   fill_in "Confirmation",             with: ""
+  #   # ボタンへのクリックをシュミレートする
+  #   click_on "Save changes"
+  # end
+
+  # # 正しい数のエラーが表示されているか検証する
+  # aggregate_failures do
+  #   # 現在いる場所とuserがいる場所が一致することを期待する
+  #   expect(current_path).to eq user_path(user)
+  #   # エラーが表示されることを期待する
+  #   expect(has_css?(".alert-danger")).to be_truthy
+  # end
 end

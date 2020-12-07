@@ -1,6 +1,16 @@
 class UsersController < ApplicationController
   # コントローラのアクションを実行する前に、logged_in_userメソッドのeditとupdateアクションのみ実行する
-  before_action :logged_in_user, only: [:edit, :update]
+  before_action :logged_in_user, only: [:index, :edit, :update, :destroy]
+  # コントローラのアクションを実行する前に、currect_userメソッドのeditとupdateアクションのみ実行する
+  before_action :correct_user, only: [:edit, :update]
+  # destroyアクションを管理者だけに限定する
+  before_action :admin_user, only: :destroy
+
+  # userの一覧ページ
+  def index
+    # Usersをページネートする
+    @users = User.paginate(page: params[:page])
+  end
 
   # showアクション定義
   def show
@@ -56,6 +66,16 @@ class UsersController < ApplicationController
     end
   end
 
+  # destroyアクション定義
+  def destroy
+    # Userモデルのidを検出し削除する
+    User.find(params[:id]).destroy
+    # フラッシュメッセージを表示する
+    flash[:success] = "User deleted"
+    # usersページへリダイレクトする
+    redirect_to users_url
+  end
+
   # 外部から使えないようにする
   private
 
@@ -71,10 +91,25 @@ class UsersController < ApplicationController
   def logged_in_user
     # loginしていない場合の処理
     unless logged_in?
+      # store_locationメソッドを呼び出す
+      store_location
       # フラッシュメッセージを表示する
       flash[:danger] = "Please log in."
       # loginページにリダイレクトする
       redirect_to login_url
     end
+  end
+
+  # 正しいuserかどうか確認する
+  def correct_user
+    # Userモデルのidを検索して変数に代入する
+    @user = User.find(params[:id])
+    # @userが現在のuserではなければ、rootページへリダイレクトする
+    redirect_to(root_url) unless current_user?(@user)
+  end
+
+  # 管理者かどうか確認する
+  def admin_user
+    redirect_to(root_url) unless current_user.admin?
   end
 end
