@@ -1,8 +1,10 @@
 class User < ApplicationRecord
   # 仮想の属性を作成する
-  attr_accessor :remember_token
-  # userをDBに保存する前に、email属性を強制的に小文字に変換する
-  before_save { email.downcase! }
+  attr_accessor :remember_token, :activation_token
+  # userをDBに保存する前にemail属性を小文字にする
+  before_save :downcase_email
+  # userをDBに作成する前にメソッドを参照する
+  before_create :create_activation_digest
   
   # name属性の存在性の検証をし、長さの上限を強制する
   validates :name,  presence: true, length: { maximum: 50 }
@@ -45,16 +47,34 @@ class User < ApplicationRecord
   end
 
   # 渡されたトークンがダイジェストと一致したらtrueを返す
-  def authenticated?(remember_token)
+  def authenticated?(attribute, token)
+    # 変数にダイジェストを代入する
+    digest = send("#{attribute}_digest")
     # ダイジェストがnilの場合はfalseを返す
-    return false if remember_digest.nil?
+    return false if digest.nil?
     # 渡されたトークンがuserの記憶ダイジェストと一致することを確認する
-    BCrypt::Password.new(remember_digest).is_password?(remember_token)
+    BCrypt::Password.new(digest).is_password?(token)
   end
 
   # userのlogin情報を破棄する
   def forget
     # userを忘れる
     update_attribute(:remember_digest, nil)
+  end
+
+  private
+
+  # emailを全て小文字にする
+  def downcase_email
+    # 変数に小文字化したemailを代入する
+    self.email = email.downcase
+  end
+
+  # 有効化トークンとダイジェストを作成および代入する
+  def create_activation_digest
+    # 変数にUserモデルのnew_tokenを代入する
+    self.activation_token = User.new_token
+    # 変数にUserモデルのactivation_tokenを代入する
+    self.activation_digest = User.digest(activation_token)
   end
 end

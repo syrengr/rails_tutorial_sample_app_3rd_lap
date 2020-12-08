@@ -33,7 +33,7 @@ module SessionsHelper
       # user_idを探して変数に代入する
       user = User.find_by(id: user_id)
       # userであり、cookies[:remember_token]を所持している場合の処理
-      if user && user.authenticated?(cookies[:remember_token])
+      if user && user.authenticated?(:remember, cookies[:remember_token])
         # loginする
         log_in user
         # userを変数に代入する

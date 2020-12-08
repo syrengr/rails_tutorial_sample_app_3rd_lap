@@ -1,6 +1,4 @@
 Rails.application.routes.draw do
-  get 'sessions/new'
-
   # ルート「/」へのGETリクエストがStaticPagesコントローラのhomeアクションにルーティングされる
   root 'static_pages#home'
   # GETリクエストが /help に送信されたときにStaticPagesコントローラのhelpアクションを呼び出す
@@ -23,4 +21,6 @@ Rails.application.routes.draw do
   delete '/logout', to: 'sessions#destroy'
   # HTTP標準を装備している
   resources :users
+  # アカウント有効化に使うリソース
+  resources :account_activations, only: [:edit]
 end

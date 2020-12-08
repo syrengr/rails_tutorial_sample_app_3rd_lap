@@ -30,13 +30,12 @@ class UsersController < ApplicationController
     @user = User.new(user_params)
     # 保存に成功した場合の処理
     if @user.save
-      # user登録中にloginする
-      log_in @user
-      # 保存に失敗した場合の処理
-      # フラッシュメッセージを追加する
-      flash[:success] = "Welcome to the Sapmle App!"
-      # 新しく作成されたuserのプロフィールページにリダイレクトする
-      redirect_to @user
+      # user登録にアカウント有効化を追加する
+      UserMailer.account_activation(@user).deliver_now
+      # フラッシュメッセージを表示する
+      flash[:info] = "Please check your email to activate your account."
+      # rootページへリダイレクトする
+      redirect_to root_url
     else
       # newをレンダリングさせる
       render 'new'
