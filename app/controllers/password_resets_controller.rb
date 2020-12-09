@@ -4,7 +4,7 @@ class PasswordResetsController < ApplicationController
   # コントローラのアクションを実行する前に、valid_userメソッドのeditとupdateアクションのみ実行する
   before_action :valid_user,       only: [:edit, :update]
   # コントローラのアクションを実行する前に、check_expirationメソッドのeditとupdateアクションのみ実行する
-  before_action :check_expiration, only[:edit, :update]
+  before_action :check_expiration, only: [:edit, :update]
 
   # 新規
   def new
