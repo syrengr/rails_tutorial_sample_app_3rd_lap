@@ -1,6 +1,6 @@
 class User < ApplicationRecord
   # 仮想の属性を作成する
-  attr_accessor :remember_token, :activation_token
+  attr_accessor :remember_token, :activation_token, :reset_token
   # userをDBに保存する前にemail属性を小文字にする
   before_save :downcase_email
   # userをDBに作成する前にメソッドを参照する
@@ -72,6 +72,26 @@ class User < ApplicationRecord
   def send_activation_email
     # 有効化メールを送信する
     UserMailer.account_activation(self).deliver_now
+  end
+
+  # password再設定の属性を設定する
+  def create_reset_digest
+    # 変数にトークンを代入する
+    self.reset_token = User.new_token
+    # ダイジェストとTime.zoneを更新する
+    update_columns(reset_digest: User.digest(reset_token), reset_sent_at: Time.zone.now)
+  end
+
+  # password再設定のメールを送信する
+  def send_password_reset_email
+    # password再設定
+    UserMailer.password_reset(self).deliver_now
+  end
+
+  # password再設定用メソッドを追加する
+  def password_reset_expired?
+    # 2時間以上passwordが再設定されていないか確認する
+    reset_sent_at < 2.hours.ago
   end
 
   private
