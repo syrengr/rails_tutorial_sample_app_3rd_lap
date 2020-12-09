@@ -9,13 +9,15 @@ class UsersController < ApplicationController
   # userの一覧ページ
   def index
     # Usersをページネートする
-    @users = User.paginate(page: params[:page])
+    @users = User.where(activated: true).paginate(page: params[:page])
   end
 
   # showアクション定義
   def show
     # paramsでユーザーid読み出す
     @user = User.find(params[:id])
+    # 有効なuserだけを表示する
+    redirect_to root_url and return unless @user.activated?
   end
 
   # newアクション定義
@@ -30,8 +32,8 @@ class UsersController < ApplicationController
     @user = User.new(user_params)
     # 保存に成功した場合の処理
     if @user.save
-      # user登録にアカウント有効化を追加する
-      UserMailer.account_activation(@user).deliver_now
+      # userモデルオブジェクトからメールを送信する
+      @user.send_activation_email
       # フラッシュメッセージを表示する
       flash[:info] = "Please check your email to activate your account."
       # rootページへリダイレクトする
