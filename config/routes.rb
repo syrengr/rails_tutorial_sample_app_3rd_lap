@@ -19,12 +19,20 @@ Rails.application.routes.draw do
   post '/login', to: 'sessions#create'
   # DELETEリクエストが /logout に送信されたときにSessionsコントローラのdestroyアクションを呼び出す
   delete '/logout', to: 'sessions#destroy'
+
   # HTTP標準を装備している
-  resources :users
+  resources :users do
+    member do
+      get :following, :followers
+    end
+  end
+
   # アカウント有効化に使うリソース
   resources :account_activations, only: [:edit]
   # password再設定用リソースを追加する
   resources :password_resets, only: [:new, :create, :edit, :update]
   # マイクロポストリソースのルーティング
   resources :microposts, only: [:create, :destroy]
+  # Relationshipリソースのルーティング
+  resources :relationships,       only: [:create, :destroy]
 end
