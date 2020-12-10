@@ -1,4 +1,6 @@
 class User < ApplicationRecord
+  # Micropostを所有する
+  has_many :microposts, dependent: :destroy
   # 仮想の属性を作成する
   attr_accessor :remember_token, :activation_token, :reset_token
   # userをDBに保存する前にemail属性を小文字にする
@@ -92,6 +94,12 @@ class User < ApplicationRecord
   def password_reset_expired?
     # 2時間以上passwordが再設定されていないか確認する
     reset_sent_at < 2.hours.ago
+  end
+
+  # マイクロポストのステータスフィードを実装するための準備
+  def feed
+    # Micropostモデルのidを取得する
+    Micropost.where("user_id = ?", id)
   end
 
   private

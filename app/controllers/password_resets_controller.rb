@@ -62,6 +62,7 @@ class PasswordResetsController < ApplicationController
     end
   end
 
+  # 外部から使えないようにする
   private
 
   # user_paramsアクション定義

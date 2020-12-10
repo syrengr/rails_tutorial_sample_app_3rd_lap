@@ -25,4 +25,6 @@ Rails.application.routes.draw do
   resources :account_activations, only: [:edit]
   # password再設定用リソースを追加する
   resources :password_resets, only: [:new, :create, :edit, :update]
+  # マイクロポストリソースのルーティング
+  resources :microposts, only: [:create, :destroy]
 end
