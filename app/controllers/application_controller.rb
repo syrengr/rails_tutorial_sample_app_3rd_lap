@@ -1,4 +1,5 @@
 class ApplicationController < ActionController::Base
+  # CSRF対策
   protect_from_forgery with: :exception
   # Sessionsヘルパーを読み込む
   include SessionsHelper
@@ -15,7 +16,7 @@ class ApplicationController < ActionController::Base
       # フラッシュメッセージを表示する
       flash[:danger] = "Please log in."
       # loginページをリダイレクトする
-      redirect_to login_in
+      redirect_to login_url
     end
   end
 end

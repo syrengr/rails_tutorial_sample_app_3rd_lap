@@ -77,17 +77,27 @@ class UsersController < ApplicationController
     redirect_to users_url
   end
 
+  # followingアクション定義
   def following
+    # 変数に"Following"を代入する
     @title = "Following"
+    # 変数にUserモデルのidを代入する
     @user  = User.find(params[:id])
+    # 変数にfollowingを代入する
     @users = @user.following.paginate(page: params[:page])
+    # 'show_follow'をレンダリングする
     render 'show_follow'
   end
 
+  # followersアクション定義
   def followers
+    # 変数に"Followers"を代入する
     @title = "Followers"
+    # 変数にUserモデルのidを代入する
     @user  = User.find(params[:id])
+    # 変数にfollowersを代入する
     @users = @user.followers.paginate(page: params[:page])
+    # 'show_follow'をレンダリングする
     render 'show_follow'
   end
 
@@ -112,6 +122,7 @@ class UsersController < ApplicationController
 
   # 管理者かどうか確認する
   def admin_user
+    # rootページへリダイレクトする
     redirect_to(root_url) unless current_user.admin?
   end
 end

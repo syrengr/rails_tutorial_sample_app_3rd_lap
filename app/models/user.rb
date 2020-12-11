@@ -111,25 +111,29 @@ class User < ApplicationRecord
 
   # マイクロポストのステータスフィードを実装するための準備
   def feed
-    # Micropostモデルのidを取得する
+    # Relationshipモデルのfollowed_idを取得する
     following_ids = "SELECT followed_id FROM relationships
                      WHERE follower_id = :user_id"
+    # Micropostモデルのuser_idを取得する
     Micropost.where("user_id IN (#{following_ids})
                      OR user_id = :user_id", user_id: id)
   end
 
   # ユーザーをフォローする
   def follow(other_user)
+    # following以上other_user以下
     following << other_user
   end
 
   # ユーザーをフォロー解除する
   def unfollow(other_user)
+    # Relationshipモデルのother_user.idを削除する
     active_relationships.find_by(followed_id: other_user.id).destroy
   end
 
   # 現在のユーザーがフォローしてたらtrueを返す
   def following?(other_user)
+    # followingがother_userを含んでいるか検証する
     following.include?(other_user)
   end
 
