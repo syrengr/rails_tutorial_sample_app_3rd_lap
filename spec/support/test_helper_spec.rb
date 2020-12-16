@@ -25,120 +25,18 @@ module SystemHelper
     # loginページを開く
     visit login_path
     # Emailフォームへの入力をシュミレートする
-    fill_in "Email",    with: user.email
+    fill_in "Email",    with: "example@railstutorial.org"
     # Passwordフォームへの入力をシュミレートする
-    fill_in "Password", with: user.password
+    fill_in "Password", with: "foobar"
     # Log inボタンへのクリックをシュミレートする
     click_button "Log in"
   end
 end
 
+# 設定
 RSpec.configure do |config|
-  config.include TestHelper
-  config.include SystemHelper
-end
-
-# 永続セッションのテスト
-RSpec.describe SessionsHelper, type: :helper do
   # TestHelperを読み込む
-  include TestHelper
-  # userを定義する
-  let!(:user) do
-    # nameからpassword_confirmationのバリューをuserキーに代入する
-    create(:user, name:                  "ORIGINAL",
-                  email:                 "ORIGINAL@EXAMPLE.COM",
-                  password:              "password",
-                  password_confirmation: "password" )
-  end
-
-  # 現在のuserのテスト
-  describe "current_user" do
-    # 前処理
-    before do
-      # 渡されたuserをrememberメソッドで記憶する
-      remember(user)
-    end
-    # sessionがnilの場合
-    it "current_user returns right when session is nil" do
-      # 現在のuserが渡されたuserと同じであることを期待する
-      expect(current_user).to eq user
-      # user登録後のloginがtruthyであることを期待する
-      expect(is_logged_in?).to be_truthy
-    end
-    # ダイジェストの記憶が間違っている場合
-    it "current_user returns nil when remember digest is wrong" do
-      # userの記憶ダイジェストが記憶トークンと正しく対応していないことを検証する
-      user.update_attribute(:remember_digest, User.digest(User.new_token))
-      # 現在のuserがnilになることを期待する
-      expect(current_user).to eq nil
-    end
-  end
-end
-
-# 編集の失敗と成功に対するテスト
-RSpec.describe "UsersEdits", type: :system do
+  config.include TestHelper
   # SystemHelperを読み込む
-  include SystemHelper
-
-  # userを定義する
-  let!(:user) do
-    # nameからpassword_confirmationのバリューをuserキーに代入する
-    create(:user, name:                  "ORIGINAL",
-                  email:                 "ORIGINAL@EXAMPLE.COM",
-                  password:              "password",
-                  password_confirmation: "password" )
-  end
-
-  # # 編集の失敗に対するテスト
-  # # Capybaraではitの代わりにscenarioを使う
-  # scenario "it fails esit with wrong information" do
-  #   # 編集の失敗に対するテスト用メソッドを呼び出す
-  #   login_as(user)
-  #   # ボタンへのクリックをシュミレートする
-  #   click_on "Setting"
-  #   # fill_inメソッドでフォームへの入力をシュミレートする
-  #   # Nameフォームへの入力
-  #   fill_in "Name",                   with: ""
-  #   # Emailフォームへの入力
-  #   fill_in "Email",                  with: "testuser@example.com"
-  #   # Passwordフォームへの入力
-  #   fill_in "Password",               with: ""
-  #   # Confirmationフォームへの入力
-  #   fill_in "Confirmation",           with: ""
-  #   # ボタンへのクリックをシュミレートする
-  #   click_on "Save changes"
-  #   # 正しい数のエラーメッセージが表示されているかテスト
-  #   is_expected.to have_selector("The form contains 4 errors.")
-
-  #   # 正しい数のエラーが表示されているか検証する
-  #   aggregate_failures do
-  #     # 現在いる場所とuserがいる場所が一致することを期待する
-  #     expect(current_path).to eq user_path(user)
-  #     # エラーが表示されることを期待する
-  #     expect(has_css?(".alert-danger")).to be_truthy
-  #   end
-  # end
-
-  # # 編集の成功に対するテスト
-  # scenario "it succeeds edit with correct information" do
-  #   # fill_inメソッドでフォームへの入力をシュミレートする
-  #   # Nameフォームへの入力
-  #   fill_in "Name",                     with: "Foo Bar"
-  #   # Emailフォームへの入力
-  #   fill_in "Email",                    with: "foo@bar.com"
-  #   # Passwordフォームへの入力
-  #   fill_in "Password",                 with: ""
-  #   # Confirmationフォームへの入力
-  #   fill_in "Confirmation",             with: ""
-  #   # ボタンへのクリックをシュミレートする
-  #   click_on "Save changes"
-  # end
-
-  # # 正しい数のエラーが表示されているか検証する
-  # aggregate_failures do
-  #   # 現在いる場所とuserがいる場所が一致することを期待する
-  #   expect(current_path).to eq user_path(user)
-  #   # エラーが表示されることを期待する
-  #   expect(has_css?(".alert-danger")).to be_truthy
-  # end
+  config.include SystemHelper
 end
