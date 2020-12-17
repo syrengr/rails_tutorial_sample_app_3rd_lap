@@ -15,7 +15,6 @@ RSpec.describe SessionsHelper, type: :helper do
                   password:              "password",
                   password_confirmation: "password" )
   end
-
   # 現在のuserのテスト
   describe "current_user" do
     # 前処理

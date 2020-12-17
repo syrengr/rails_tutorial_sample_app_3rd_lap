@@ -11,4 +11,10 @@ FactoryBot.define do
     # passwordの確認用テストデータを作成する
     password_confirmation { "password" }
   end
+
+  # Traitsは多くのフィクスチャ（テスト用データを自動的に用意するための仕組み）を必要とするときに使う
+  trait :admin do
+    # 管理者をtrueにする
+    admin { true }
+  end
 end

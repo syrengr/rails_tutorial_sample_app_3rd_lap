@@ -16,12 +16,12 @@ RSpec.describe "users", type: :system do
       fill_in "Email",                  with: "testuser@example.com"
       # Passwordフォームへの入力
       fill_in "Password",               with: "password"
-      # Confirmationフォームへの入力
 =begin
-以下のエラーが発生し、config/production.rb内に「config.action_mailer.default_url_options = { host: 'example.com'}」を記述しても解決しないため、コメントアウト
-ActionView::Template::Error: Missing host to link to! Please provide the :host parameter, set default_url_options[:host], or set :only_path to true
+      以下のエラーが発生し、config/production.rb内に「config.action_mailer.default_url_options = { host: 'example.com'}」を記述しても解決しないため、コメントアウト
+      ActionView::Template::Error: Missing host to link to! Please provide the :host parameter, set default_url_options[:host], or set :only_path to true
+      # Confirmationフォームへの入力
+      fill_in "Confirmation",           with: "password"
 =end
-      # fill_in "Confirmation",           with: "password"
       # ボタンへのクリックをシュミレートする
       click_button "Create my account"
     end
@@ -29,6 +29,7 @@ ActionView::Template::Error: Missing host to link to! Please provide the :host p
 
   # 無効な値が入力されたときに表示されるエラーメッセージのテスト
   context "enter an invalid values" do
+    # 前処理
     before do
       # signupページを開く
       visit signup_path
@@ -50,14 +51,6 @@ ActionView::Template::Error: Missing host to link to! Please provide the :host p
     it "gets an errors" do
       # have_selectorのtextオプションでコンテンツ内容がマッチするか検証する
       is_expected.to have_selector("#error_explanation")
-      # have_selectorのtextオプションでコンテンツ内容がマッチするか検証する
-      # is_expected.to have_selector(".alert-danger", text: "The form contains 6 errors.")
-      # have_contentでコンテンツ内容を確認する
-      # is_expected.to have_content("Password can't be blank", count: 2)
-    end
-    # 今いるページのURLの検証をする
-    it " render to /signup url" do
-      # is_expected.to have_current_path "/signup"
     end
   end
 end
