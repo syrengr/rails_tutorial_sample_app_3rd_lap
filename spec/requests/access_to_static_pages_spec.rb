@@ -1,52 +1,52 @@
 # rails_helperを読み込む
 require "rails_helper"
 
-# タイトルの引用元：Rails チュートリアル（３章、４章、５章）をRSpecでテスト
+# static_pagesへのアクセスに対するテストをする
 RSpec.describe "access to static_pages", type: :request do
-  # タイトルの引用元：Rails チュートリアル（３章、４章、５章）をRSpecでテスト
+  # homeアクションのテスト
   context "GET #home" do
     # アクションをgetして正常に動作することを検証する
     before { get root_path }
-    # タイトルの引用元：Rails Tutorial
+    # レスポンスに成功しているか検証する
     it "should get home" do
-      # 200レスポンスが返却されていることを検証する
+      # 200レスポンスが返却されていることを期待する
       expect(response).to have_http_status 200
     end
-    # タイトルの引用元：Rails チュートリアル（３章、４章、５章）をRSpecでテスト
+    # レスポンスの内容を検証する
     it "has title 'Ruby on Rails Tutorial Sample App'" do
-      # レスポンスにApplicationHelperのfull_titileメソッドが含まれていることを検証する
+      # レスポンスにApplicationHelperのfull_titileメソッドが含まれていることを期待する
       expect(response.body).to include full_title("")
-      # レスポンスに文字列"| Ruby on Rails Tutorial Sample App"が含まれていないことを検証する
+      # レスポンスに文字列"| Ruby on Rails Tutorial Sample App"が含まれていないことを期待する
       expect(response.body).to_not include "| Ruby on Rails Tutorial Sample App"
     end
   end
 
-  # タイトルの引用元：Rails チュートリアル（３章、４章、５章）をRSpecでテスト
+  # helpアクションのテスト
   context "GET #help" do
     # アクションをgetして正常に動作することを検証する
     before { get help_path }
-    # タイトルの引用元：Rails Tutorial
+    # レスポンスに成功しているか検証する
     it "should get help" do
       # 200レスポンスが返却されていることを検証する
       expect(response).to have_http_status 200
     end
-    # タイトルの引用元：Rails チュートリアル（３章、４章、５章）をRSpecでテスト
+    # レスポンスの内容を検証する
     it "has title 'Home | Ruby on Rails Tutorial Sample App'" do
-      # レスポンスにApplicationHelperのfull_titileメソッドと引数が含まれていることを検証する
+      # レスポンスにApplicationHelperのfull_titileメソッドと引数が含まれていることを期待する
       expect(response.body).to include full_title("Help")
     end
   end
 
-  # タイトルの引用元：Rails チュートリアル（３章、４章、５章）をRSpecでテスト
+  # aboutアクションのテスト
   context "GET #about" do
     # アクションをgetして正常に動作することを検証する
     before { get about_path }
-    # タイトルの引用元：Rails Tutorial
+    # レスポンスに成功しているか検証する
     it "should get about" do
       # 200レスポンスが返却されていることを検証する
       expect(response).to have_http_status 200
     end
-    # タイトルの引用元：Rails チュートリアル（３章、４章、５章）をRSpecでテスト
+    # レスポンスの内容を検証する
     it "has title 'About | Ruby on Rails Tutorial Sample App'" do
       # レスポンスにApplicationHelperのfull_titileメソッドと引数が含まれていることを検証する
       expect(response.body).to include full_title("About")

@@ -1,7 +1,7 @@
 # rails_helperを読み込む
 require "rails_helper"
 
-# タイトルの引用元：Rails チュートリアル（8章）をRSpecでテスト
+# sessionsのテストをする
 RSpec.describe "sessions", type: :system do
   # 前処理
   before do
@@ -22,7 +22,7 @@ RSpec.describe "sessions", type: :system do
       # ボタンへのクリックをシュミレートする
       click_button "Log in"
     end
-    # logoutリンクのテスト
+    # logoutリンクのテストを検証する
     it "log out after log in" do
       # "Account"リンクがあることを検証する
       is_expected.to_not have_link "Account"
@@ -46,20 +46,20 @@ RSpec.describe "sessions", type: :system do
     end
     # レスポンスの処理を変数に置き換える
     subject { page }
-    # フォームへの入力事項が満たされていないときに、loginページにフラッシュメッセージが表示される
+    # フォームへの入力事項が満たされていないときに、loginページにフラッシュメッセージが表示されることを検証する
     it "gets an flash messages" do
-      # have_selectorのtextオプションでコンテンツ内容がマッチするか検証する
+      # have_selectorのtextオプションでコンテンツ内容がマッチすることを期待する
       is_expected.to have_selector(".alert-danger", text: "Invalid email/password combination")
-      # 現在のパスがloginであるか検証する
+      # 現在のパスがloginであることを期待する
       is_expected.to have_current_path login_path
     end
-    # loginページから別のページへ移遷したときに、別のページではフラッシュメッセージが消える
-    context "access to other page" do # contextは特定の条件が何か記述する
+    # loginページから別のページへ移遷したときに、別のページではフラッシュメッセージが消えることを検証する
+    context "access to other page" do
       # 前処理としてrootページを開く
       before { visit root_path }
       # フラッシュメッセージが消える
       it "is flash disappear" do
-        # have_selectorのtextオプションでコンテンツ内容がマッチしていないと検証する
+        # have_selectorのtextオプションでコンテンツ内容がマッチしていないことを検証する
         is_expected.to_not have_selector(".alert-danger", text: "Invalid email/password combination")
       end
     end

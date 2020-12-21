@@ -3,7 +3,7 @@ require "rails_helper"
 
 # ApplicationHelperを読み込む
 RSpec.describe ApplicationHelper, type: :helper do
-  # タイトルの引用元：Rails Tutorial
+  # full_titleメソッドのテスト
   describe "#full title helper" do
     # full_titileメソッドに文字列"Ruby on Rails Tutorial Sample App"が含まれていることを検証する
     it { expect(full_title("")).to eq "Ruby on Rails Tutorial Sample App" }

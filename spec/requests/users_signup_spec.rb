@@ -1,14 +1,14 @@
 # rails_helperを読み込む
 require "rails_helper"
 
-# user登録に対するテスト
+# user登録に対するテストをする
 RSpec.describe "POST #create" do
   # 有効なuser登録に対するテスト
   context "valid user" do
     # 情報と契約すると有効化するか検証する
     it "valid signup information" do
 =begin
-      以下のエラーが発生し、config/production.rb内に「config.action_mailer.default_url_options = { host: 'example.com'}」を記述しても解決しないため、コメントアウト
+      下記エラーに対して、config/production.rb内に「config.action_mailer.default_url_options = { host: 'example.com'}」を記述しても解決しないためコメントアウト
       ActionView::Template::Error: Missing host to link to! Please provide the :host parameter, set default_url_options[:host], or set :only_path to true
       # 登録に成功するとuser数が1増えることを検証する
       expect do
@@ -18,10 +18,10 @@ RSpec.describe "POST #create" do
       end.to change(User, :count).by(1)
 =end
     end  
-    # userが追加されたときの処理
+    # userが追加された場合
     context "when adds a user" do
 =begin
-      以下のエラーが発生し、config/production.rb内に「config.action_mailer.default_url_options = { host: 'example.com'}」を記述しても解決しないため、コメントアウト
+      下記エラーに対して、config/production.rb内に「config.action_mailer.default_url_options = { host: 'example.com'}」を記述しても解決しないためコメントアウト
       ActionView::Template::Error: Missing host to link to! Please provide the :host parameter, set default_url_options[:host], or set :only_path to true
       # userファクトリをバリューとしてuserキーに代入してハッシュ化し、paramsに代入し、signupへpostリクエストする
       before { post signup_path, params: { user: attributes_for(:user) } }
@@ -43,7 +43,7 @@ RSpec.describe "POST #create" do
     end
     # 情報と契約すると無効化するか検証する
     it "invalid signup information" do
-      # 登録に失敗するとuser数が1増えないことを検証する
+      # 登録に失敗するとuser数が1増えないことを期待する
       expect do
         # user_paramsバリューをuserキーとparamsに代入し、signupへpostリクエストする
         post signup_path, params: { user: user_params }
@@ -52,13 +52,13 @@ RSpec.describe "POST #create" do
     end
   end
 
-  # テストuserでloginする
+  # テストuserでloginするテスト
   describe "PATH/users/:id" do
     # userファクトリを作成する
     let(:user) { FactoryBot.create(:user) }
     # 前処理としてlog_in_as(user)を呼び出す
     before { log_in_as(user) }
-    # 更新に失敗する
+    # user情報の更新に失敗することを検証する
     it "fails edit with wrong information" do
       # user情報を更新する
       patch user_path(user), params: { user: {　name: " ",
@@ -67,7 +67,7 @@ RSpec.describe "POST #create" do
                                                 password_confirmation: "bar" }}
     end
 
-    # 更新に成功する
+    # user情報の更新に成功することを検証する
     it "succeeds edit with correct information" do
       # user情報を更新する
       patch user_path(user), params: { user: {　name: "Foo Bar",

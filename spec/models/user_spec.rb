@@ -1,17 +1,13 @@
 # rails_helperを読み込む
 require "rails_helper"
 
-# Rails Tutorial以外のタイトルの引用元：Rails チュートリアル（３章、４章、５章）をRSpecでテスト
+# バリデーションのテストをする
 RSpec.describe User, type: :model do
-  # FactoryBotが存在するか検証する
-  it "has a valid factory bot" do
-    # テストデータが作成されたことを期待する
-    expect(build(:user)).to be_valid
-  end
+  # Userモデルのファクトリを作成する
+  let(:user) { FactoryBot.build(:user) }
   
-  # バリデーションを検証する（1）
+  # nameとemailのバリデーションのテスト
   describe "validations" do
-    # validate_presence_of :フィールド名で、対象のモデルの中に指定したフィールド名が存在しているか検証する
     # nameが存在しているか検証する
     it { is_expected.to validate_presence_of(:name) }
     # emailが存在しているか検証する
@@ -22,6 +18,7 @@ RSpec.describe User, type: :model do
     it { is_expected.to validate_length_of(:email).is_at_most(255) }
     # 有効なemailのテストデータ作成
     it "valid email" do
+      # 複数のemailを代入する
       is_expected.to allow_values('first.last@foo.jp',
                                   'user@example.com',
                                   'USER@foo.COM',
@@ -30,6 +27,7 @@ RSpec.describe User, type: :model do
     end
     # 無効なemailのテストデータ作成
     it "invalid email" do
+      # 複数のemailを代入する
       is_expected.to_not allow_values('user@example,com',
                                       'user_at_foo.org',
                                       'user.name@example.',
@@ -58,8 +56,9 @@ RSpec.describe User, type: :model do
     end
   end
 
-  # emailを小文字にするbefore_saveを検証する
+  # emailを小文字にするbefore_saveのテスト
   describe "before_save" do
+    # #email_downcaseのテスト
     describe "#email_downcase" do
       # emailのテストデータ作成
       let!(:user) { create(:user, email: "ORIGINAL@EXAMPLE.COM") }
@@ -71,13 +70,13 @@ RSpec.describe User, type: :model do
     end
   end
 
-  # バリデーションを検証する（2）
+  # passwordのバリデーションのテスト
   describe "validations" do
-    # passwordのバリデーションを検証する
+    # passwordの存在性のテスト
     describe "validate presence of password" do
       # passwordの最小文字数を検証する
       it "is invalid with a blank password" do
-        # passwordの長さが6文字以上であることを検証する
+        # passwordの長さを6文字以上に設定する
         user =  build(:user, password: " " * 6)
         # userがvalid?でfalseであることを期待する
         expect(user).to_not be_valid
@@ -87,13 +86,34 @@ RSpec.describe User, type: :model do
     it { is_expected.to validate_length_of(:password).is_at_least(6) }
   end
 
-  # authenticated?のテスト
+  # authenticated?メソッドを検証する
   it "returns false for a user with nil digest" do
 =begin
-    以下のエラーが発生し、原因を解明できていないため、コメントアウト
+    下記エラーの原因を解明できないためコメントアウト
     NameError:　undefined local variable or method `user' for #<RSpec::ExampleGroups::User:0x00007f9c0a559328>
-    # Userテスト内の抽象化したauthenticated?メソッド
+    # authenticated?メソッドの戻り値がfalsyであることを期待する
     expect(user.authenticated?(:remember, "")).to be_falsy
 =end
+  end
+
+  # dependent: :destroyのテスト
+  describe "dependent: :destroy" do
+    # 前処理
+    before do
+      # userを登録する
+      user.save
+      # micropostを作成する
+      user.microposts.create!(content: "Lorem ipsum")
+    end
+
+    # userの登録に成功した場合を検証する
+    it "succeeds" do
+      # 以下の挙動を期待する
+      expect do
+        # userを削除する
+        user.destroy
+      # micropostが1件減少することを期待する
+      end.to change(Micropost, :count).by(-1)
+    end
   end
 end

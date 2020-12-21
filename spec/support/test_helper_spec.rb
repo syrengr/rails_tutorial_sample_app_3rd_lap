@@ -1,7 +1,7 @@
 # rails_helperを読み込む
 require "rails_helper"
 
-# moduleの引用元：RailsチュートリアルのテストをRspecで書いてみた[第9章]
+# TestHelperモジュール
 module TestHelper
   # user登録後のloginのテスト用メソッド
   def is_logged_in?
@@ -18,7 +18,7 @@ module TestHelper
   end
 end
 
-# moduleの引用元：RailsチュートリアルのテストをRspecで書いてみた[第10章]
+# SystemHelperモジュール
 module SystemHelper
   # 編集の失敗に対するテスト用メソッド
   def login_as(user)

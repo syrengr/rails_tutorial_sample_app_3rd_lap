@@ -1,7 +1,7 @@
 # rails_helperを読み込む
 require "rails_helper"
 
-# タイトルの引用元：Rails チュートリアル（8章）をRSpecでテスト
+# sessionsのテストをする
 RSpec.describe "sessions", type: :system do
   # 前処理
   before do
