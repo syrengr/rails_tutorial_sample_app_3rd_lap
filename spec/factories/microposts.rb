@@ -1,6 +1,4 @@
-# FactoryBotを定義する
 FactoryBot.define do
-  # Micropostのファクトリを作成する
   factory :micropost do
     content { "micropost test" }
     created_at { 10.minutes.ago }

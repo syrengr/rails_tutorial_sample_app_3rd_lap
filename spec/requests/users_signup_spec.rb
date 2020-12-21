@@ -10,6 +10,7 @@ RSpec.describe "POST #create" do
 =begin
       下記エラーに対して、config/production.rb内に「config.action_mailer.default_url_options = { host: 'example.com'}」を記述しても解決しないためコメントアウト
       ActionView::Template::Error: Missing host to link to! Please provide the :host parameter, set default_url_options[:host], or set :only_path to true
+      
       # 登録に成功するとuser数が1増えることを検証する
       expect do
         # nameからpassword_confirmationのバリューをuserとparamsに代入し、usersにpostメソッドで登録する
@@ -23,6 +24,7 @@ RSpec.describe "POST #create" do
 =begin
       下記エラーに対して、config/production.rb内に「config.action_mailer.default_url_options = { host: 'example.com'}」を記述しても解決しないためコメントアウト
       ActionView::Template::Error: Missing host to link to! Please provide the :host parameter, set default_url_options[:host], or set :only_path to true
+      
       # userファクトリをバリューとしてuserキーに代入してハッシュ化し、paramsに代入し、signupへpostリクエストする
       before { post signup_path, params: { user: attributes_for(:user) } }
 =end

@@ -91,6 +91,7 @@ RSpec.describe User, type: :model do
 =begin
     下記エラーの原因を解明できないためコメントアウト
     NameError:　undefined local variable or method `user' for #<RSpec::ExampleGroups::User:0x00007f9c0a559328>
+    
     # authenticated?メソッドの戻り値がfalsyであることを期待する
     expect(user.authenticated?(:remember, "")).to be_falsy
 =end
@@ -114,6 +115,35 @@ RSpec.describe User, type: :model do
         user.destroy
       # micropostが1件減少することを期待する
       end.to change(Micropost, :count).by(-1)
+    end
+  end
+
+  # Relationshipモデルのバリデーションをテストする
+  describe "follow and unfollow" do
+    # ファクトリ作成
+    let(:user) { FactoryBot.create(:user) }
+    # ファクトリ作成
+    let(:other_user) { FactoryBot.create(:user) }
+    # 前処理
+    before { user.follow(other_user) }
+    # followテスト
+    describe "follow" do
+      # followに成功した場合を検証する
+      it "succeeds" do
+        # truthyを返すことを期待する
+        expect(user.following?(other_user)).to be_truthy
+      end
+    end
+
+    # unfollowテスト
+    describe "unfollow" do
+      # unfollowに成功した場合を検証する
+      it "succeeds" do
+        # ユーザーをunfollowする
+        user.unfollow(other_user)
+        # falsyを返すことを期待する
+        expect(user.following?(other_user)).to be_falsy
+      end
     end
   end
 end

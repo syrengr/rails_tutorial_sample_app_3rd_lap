@@ -20,7 +20,9 @@ FactoryBot.define do
 
   # アカウント有効化テスト用データ
   trait :no_activated do
+    # 論理値をfalseに設定する
     activated { false }
+    # 論理値をnilに設定する
     activated_at { nil }
   end
 end

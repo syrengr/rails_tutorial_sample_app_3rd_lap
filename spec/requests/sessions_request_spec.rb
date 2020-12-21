@@ -16,6 +16,7 @@ RSpec.describe "sessions", type: :request do
 =begin
       下記エラーの原因を解明できないためコメントアウト
       Expected response to be a redirect to <http://www.example.com/users/1/edit> but was a redirect to <http://www.example.com/>.
+
       # edit_userページへリダイレクトする
       expect(response).to redirect_to edit_user_url(user)
 =end

@@ -18,6 +18,7 @@ RSpec.describe "users", type: :system do
 =begin
       下記エラーに対して、config/production.rb内に「config.action_mailer.default_url_options = { host: 'example.com'}」を記述しても解決しないためコメントアウト
       ActionView::Template::Error: Missing host to link to! Please provide the :host parameter, set default_url_options[:host], or set :only_path to true
+
       # Confirmationフォームへの入力
       fill_in "Confirmation",           with: "password"
 =end

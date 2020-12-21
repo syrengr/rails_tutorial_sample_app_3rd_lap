@@ -45,8 +45,9 @@ RSpec.describe Micropost, type: :model do
     # 遅延評価
     let!(:yesterday) { FactoryBot.create(:micropost, :yesterday) }
 
-    # 最初のレコードが現在日時であることを期待する
+    # 順序付けに成功した場合を検証する
     it "succeeds" do
+      # 最初のレコードが現在日時であることを期待する
       expect(Micropost.first).to eq now
     end
   end

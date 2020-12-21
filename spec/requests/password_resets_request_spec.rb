@@ -8,8 +8,9 @@ RSpec.describe "PasswordResets", type: :request do
   # 前処理
   before { user.create_reset_digest }
 =begin
-      下記エラーに対して、config/production.rb内に「config.action_mailer.default_url_options = { host: 'example.com'}」を記述しても解決しないためコメントアウト
-      ActionView::Template::Error: Missing host to link to! Please provide the :host parameter, set default_url_options[:host], or set :only_path to true
+  下記エラーに対して、config/production.rb内に「config.action_mailer.default_url_options = { host: 'example.com'}」を記述しても解決しないためコメントアウト
+  ActionView::Template::Error: Missing host to link to! Please provide the :host parameter, set default_url_options[:host], or set :only_path to true
+
   # newアクションのテスト
   describe "def new" do
     # password再設定用ページへアクセスした場合を検証する

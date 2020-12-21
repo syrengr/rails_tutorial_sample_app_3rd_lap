@@ -54,6 +54,7 @@ RSpec.describe "Microposts", type: :request do
 =begin
     下記エラーの原因を解明できないためコメントアウト
     NameError:　undefined local variable or method `delete_request' for
+    
     # 遅延評価
     let(:user) { FactoryBot.create(:user) }
     # 前処理

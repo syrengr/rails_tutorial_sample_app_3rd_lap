@@ -36,6 +36,7 @@ RSpec.describe "Users", type: :request do
 =begin
       下記エラーの原因を解明できないためコメントアウト
       Failure/Error: expect(response).to have_http_status(200) expected the response to have status code 200 but it was 302
+
       # status code 200が返却されることを期待する
       expect(response).to have_http_status(200)
 =end
@@ -57,6 +58,7 @@ RSpec.describe "Users", type: :request do
 =begin
       下記エラーの原因を解明できないためコメントアウト
       Expected response to be a redirect to <http://www.example.com/users/1> but was a redirect to <http://www.example.com/login>.
+
       # status code 200が返却されることを期待する
       expect(response).to redirect_to user_path(user)
 =end
@@ -112,6 +114,7 @@ RSpec.describe "Users", type: :request do
 =begin
         下記エラーの原因を解明できないためコメントアウト
         Expected response to be a redirect to <http://www.example.com/> but was a redirect to <http://www.example.com/login>.
+
         # doからendまでの挙動を期待する
         expect do
           # userを削除する
@@ -133,6 +136,7 @@ RSpec.describe "Users", type: :request do
 =begin
         下記エラーの原因を解明できないためコメントアウト
         Users delete /users/:id succeds when user is administrator Got 2 failures from failure aggregation block.
+
         # doからendまでの挙動を期待する
         expect do
           # userを削除する
@@ -155,6 +159,7 @@ RSpec.describe "Users", type: :request do
 =begin
     下記エラーに対して、config/production.rb内に「config.action_mailer.default_url_options = { host: 'example.com'}」を記述しても解決しないためコメントアウト
     ActionView::Template::Error: Missing host to link to! Please provide the :host parameter, set default_url_options[:host], or set :only_path to true
+    
       # 集計に失敗する
       aggregate_failures do
         # 以下の挙動を期待する
