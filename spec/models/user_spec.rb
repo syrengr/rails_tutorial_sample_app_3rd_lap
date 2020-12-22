@@ -146,4 +146,49 @@ RSpec.describe User, type: :model do
       end
     end
   end
+
+  # ステーテスフィールドのテスト
+  describe "def feed" do
+    # ファクトリ作成
+    let(:user) { FactoryBot.create(:user, :with_microposts) }
+    # ファクトリ作成
+    let(:other_user) { FactoryBot.create(:user, :with_microposts) }
+    
+    # ユーザーが他のユーザーをフォローしている場合
+    context "when user is following other_user" do
+
+      # 前処理
+      before { user.active_relationships.create!(followed_id: other_user.id) }
+
+      # ユーザーのマイクロポスト内に他のユーザーのマイクロポストが含まれていることを検証する
+      it "contains other user's microposts within the user's Micropost" do
+        # マイクロポストを取り出す
+        other_user.microposts.each do |post_following|
+          # 他のユーザーのマイクロポストが含まれていることを期待する
+          expect(user.feed.include?(post_following)).to be_truthy
+        end
+      end
+
+      # 他のユーザーのマイクロポストにユーザー自身のマイクロポストが含まれていることを検証する
+      it "contains the user's own microposts in the user's Micropost" do
+        # マイクロポストを取り出す
+        user.microposts.each do |post_self|
+          # ユーザー自身のマイクロポストが含まれていることを検証する
+          expect(user.feed.include?(post_self)).to be_truthy
+        end
+      end
+    end
+
+    # ユーザーが他のユーザーをフォローしていない場合
+    context "when user is not following other_user" do
+      # ユーザーのマイクロポスト内に他のユーザーのマイクロポストが含まれていないことを検証する
+      it "doesn't contain the user's microposts within the user's Micropost" do
+        # マイクロポストを取り出す
+        other_user.microposts.each do |post_unfollowed|
+          # 他のユーザーのマイクロポストが含まれていないことを期待する
+          expect(user.feed.include?(post_unfollowed)).to be_falsy
+        end
+      end
+    end
+  end
 end

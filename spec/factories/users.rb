@@ -10,19 +10,28 @@ FactoryBot.define do
     password { "password" }
     # passwordの確認用テストデータを作成する
     password_confirmation { "password" }
-  end
 
-  # 管理者権限の制御テスト用データ
-  trait :admin do
-    # 管理者をtrueにする
-    admin { true }
-  end
+    activated { true }
+    activated_at { Time.zone.now }
 
-  # アカウント有効化テスト用データ
-  trait :no_activated do
-    # 論理値をfalseに設定する
-    activated { false }
-    # 論理値をnilに設定する
-    activated_at { nil }
+    # 管理者権限の制御テスト用データ
+    trait :admin do
+      # 管理者をtrueにする
+      admin { true }
+    end
+
+    # アカウント有効化テスト用データ
+    trait :no_activated do
+      # 論理値をfalseに設定する
+      activated { false }
+      # 論理値をnilに設定する
+      activated_at { nil }
+    end
+
+    # ステータスフィールドのテスト用データ
+    trait :with_microposts do
+      # インスタンスを生成し保存後に呼び出す
+      after(:create) { |user| create_list(:micropost, 5, user: user) }
+    end
   end
 end
