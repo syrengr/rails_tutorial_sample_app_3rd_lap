@@ -28,7 +28,7 @@ RSpec.describe "POST #create" do
       # userファクトリをバリューとしてuserキーに代入してハッシュ化し、paramsに代入し、signupへpostリクエストする
       before { post signup_path, params: { user: attributes_for(:user) } }
 =end
-      # responseの処理を変数に置き換える
+      # 処理を変数に置き換える
       subject { response }
     end
   end

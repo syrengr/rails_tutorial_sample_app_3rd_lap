@@ -5,7 +5,13 @@ require "rails_helper"
 RSpec.describe User, type: :model do
   # Userモデルのファクトリを作成する
   let(:user) { FactoryBot.build(:user) }
-  
+
+  # FactoryBotの存在性のテスト
+  it "has a valid factory bot" do
+    # ファクトリが有効であることを期待する
+    expect(build(:user)).to be_valid
+  end
+
   # nameとemailのバリデーションのテスト
   describe "validations" do
     # nameが存在しているか検証する
