@@ -6,8 +6,9 @@ RSpec.describe UserMailer, type: :mailer do
   # Userモデルのファクトリを作成する
   let(:user) { FactoryBot.create(:user) }
 =begin
-    下記エラーに対して、config/production.rb内に「config.action_mailer.default_url_options = { host: 'example.com'}」を記述しても解決しないためコメントアウト
-    ActionView::Template::Error: Missing host to link to! Please provide the :host parameter, set default_url_options[:host], or set :only_path to true
+  下記エラーに対して、config/production.rb内に「config.action_mailer.default_url_options = { host: 'example.com'}」を記述しても解決しないためコメントアウト
+  ActionView::Template::Error: Missing host to link to! Please provide the :host parameter, set default_url_options[:host], or set :only_path to true
+
   # アカウント有効化のテスト
   describe "account_activation" do
     # 遅延評価
