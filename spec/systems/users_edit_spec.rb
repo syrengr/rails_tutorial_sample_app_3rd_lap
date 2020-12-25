@@ -5,11 +5,6 @@ require "rails_helper"
 RSpec.describe "UsersEdits", type: :system do
   # userを定義する
   let(:user) { FactoryBot.create(:user) }
-=begin
-  下記エラーの原因を解明できないためコメントアウト
-  NameError:　undefined local variable or method `password' for #<RSpec::ExampleGroups::UsersEdits:0x00007fbb0c5f4028>
-  Did you mean?  passed?
-
   # 前処理
   before do
     # 編集の失敗に対するテスト用メソッドを呼び出す
@@ -60,5 +55,4 @@ RSpec.describe "UsersEdits", type: :system do
       expect(has_css?(".alert-success")).to be_truthy
     end
   end
-=end
 end

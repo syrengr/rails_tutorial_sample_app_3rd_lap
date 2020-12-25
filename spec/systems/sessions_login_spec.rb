@@ -39,13 +39,8 @@ RSpec.describe "sessions", type: :system do
     end
     # logoutリンクを検証する
     it "log out after log in" do
-=begin
-      下記エラーの原因を解明できないためコメントアウト
-      expected not to find visible link "Account", found 1 match: "Account"
-
       # "Account"リンクがあることを検証する
       is_expected.to_not have_link "Account"
-=end
       # logoutパスのリンクがnilではないことを検証する
       is_expected.to_not have_link nil, href: logout_path
       # userパスのリンクがnilではないことを検証する

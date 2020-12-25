@@ -33,13 +33,8 @@ RSpec.describe "Users", type: :request do
         # password_confirmationカラム
         password_confirmation: "bar",
       } }
-=begin
-      下記エラーの原因を解明できないためコメントアウト
-      Failure/Error: expect(response).to have_http_status(200) expected the response to have status code 200 but it was 302
-
       # status code 200が返却されることを期待する
       expect(response).to have_http_status(200)
-=end
     end
 
     # 正しい情報で編集に成功することを検証する
@@ -55,13 +50,8 @@ RSpec.describe "Users", type: :request do
         # password_confirmationカラム
         password_confirmation: "",
       } }
-=begin
-      下記エラーの原因を解明できないためコメントアウト
-      Expected response to be a redirect to <http://www.example.com/users/1> but was a redirect to <http://www.example.com/login>.
-
       # status code 200が返却されることを期待する
       expect(response).to redirect_to user_path(user)
-=end
     end
   end
 
@@ -71,10 +61,6 @@ RSpec.describe "Users", type: :request do
     let(:user) { FactoryBot.create(:user) }
     # ファクトリ作成
     let(:other_user) { FactoryBot.create(:user) }
-=begin
-    下記エラーの原因を解明できないためコメントアウト
-    NoMethodError:　undefined method `login_in_as' for #<RSpec::ExampleGroups::Users_2::BeforeActionCorrectUser:0x00007fea4405a060>
-
     # 前処理
     before { login_in_as(other_user) }
     # 間違ったユーザーでログインすると、編集ページへリダイレクトすることを検証する
@@ -95,7 +81,6 @@ RSpec.describe "Users", type: :request do
       # root_pathへリダイレクトすることを期待する
       expect(response).to redirect_to root_path
     end
-=end
   end
 
   # editとupdateアクションの保護に対するテスト
@@ -144,10 +129,6 @@ RSpec.describe "Users", type: :request do
       log_in_as(user)
       # 集計に失敗する
       aggregate_failures do
-=begin
-        下記エラーの原因を解明できないためコメントアウト
-        Expected response to be a redirect to <http://www.example.com/> but was a redirect to <http://www.example.com/login>.
-
         # doからendまでの挙動を期待する
         expect do
           # userを削除する
@@ -156,7 +137,6 @@ RSpec.describe "Users", type: :request do
         end.to change(User, :count).by(0)
         # rootページへリダイレクトする
         expect(response).to redirect_to root_url
-=end
       end
     end
 
@@ -166,10 +146,6 @@ RSpec.describe "Users", type: :request do
       log_in_as(admin_user)
       # 集計に失敗する
       aggregate_failures do
-=begin
-        下記エラーの原因を解明できないためコメントアウト
-        Users delete /users/:id succeds when user is administrator Got 2 failures from failure aggregation block.
-
         # doからendまでの挙動を期待する
         expect do
           # userを削除する
@@ -178,7 +154,6 @@ RSpec.describe "Users", type: :request do
         end.to change(User, :count).by(-1)
         # usersページへリダイレクトする
         expect(response).to redirect_to users_url
-=end
       end
     end
   end
@@ -189,10 +164,6 @@ RSpec.describe "Users", type: :request do
     let(:user) { FactoryBot.attributes_for(:user) }
     # userの登録情報とemailの作動が成功している場合は、userを新規登録する
     it "adds new user with correct signup information and sends an activation email" do
-=begin
-    下記エラーに対して、config/production.rb内に「config.action_mailer.default_url_options = { host: 'example.com'}」を記述しても解決しないためコメントアウト
-    ActionView::Template::Error: Missing host to link to! Please provide the :host parameter, set default_url_options[:host], or set :only_path to true
-    
       # 集計に失敗する
       aggregate_failures do
         # 以下の挙動を期待する
@@ -208,7 +179,6 @@ RSpec.describe "Users", type: :request do
         # is_logged_inメソッドの戻り値がfalsyであることを期待する
         expect(is_logged_in?).to be_falsy
       end
-=end
     end
   end
 end

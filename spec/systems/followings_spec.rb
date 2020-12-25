@@ -7,11 +7,6 @@ RSpec.describe "Followings", type: :system do
   let(:user) { FactoryBot.create(:user) }
   # ファクトリ作成
   let(:other_users) { FactoryBot.create_list(:user, 20) }
-
-=begin
-  下記エラーの原因を解明できないためコメントアウト
-   NameError: undefined local variable or method `password' for
-
   # 前処理
   before do
     # ファクトリを取り出す
@@ -50,9 +45,6 @@ RSpec.describe "Followings", type: :system do
     end
   end
 
-  下記エラーの原因を解明できないためコメントアウト
-  Capybara::ElementNotFound: Unable to find visible link or button "Unfollow"
-
   # フォロー数が-1件増加するテスト
   scenario "When user clicks on Unfollow, the number of following increases by -1" do
     # userページを開く
@@ -69,9 +61,6 @@ RSpec.describe "Followings", type: :system do
     end.to change(user.following, :count).by(-1)
   end
 
-  下記エラーの原因を解明できないためコメントアウト
-  Capybara::ElementNotFound: Unable to find visible link or button "Follow"
-
   # フォロワー数が1件増加するテスト
   scenario "When user clicks on Follow, the number of following increases by 1" do
     # userページを開く
@@ -87,5 +76,4 @@ RSpec.describe "Followings", type: :system do
     # フォロー数が1件増加することを期待する
     end.to change(user.following, :count).by(1)
   end
-=end
 end

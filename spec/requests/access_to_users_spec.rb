@@ -3,12 +3,6 @@ require "rails_helper"
 
 # usersコントローラーのテスト
 RSpec.describe "access to users", type: :request do
-
-=begin
-  下記エラーの原因を解明できていないためコメントアウト
-  `expect` is not available on an example group (e.g. a `describe` or `context` block).
-  It is only available from within individual examples (e.g. `it` blocks) or from constructs that run in the scope of an example (e.g. `before`, `let`, etc).
-
   describe "POST #create" do
     # 有効なリクエストのテスト
     context "valid request" do
@@ -46,7 +40,7 @@ RSpec.describe "access to users", type: :request do
                               password_confirmation: "")
       end
       # ユーザーを追加しないことを検証する
-      it "does not add a user"
+      it "does not add a user" do
         # 下記の挙動を期待する
         expect do
           # user_paramsをuserキーとparamsに代入し、signupへpostリクエストする
@@ -56,8 +50,7 @@ RSpec.describe "access to users", type: :request do
       end
     end
   end
-=end
-
+  
   # newメソッドのテスト
   describe "GET #new" do
     # レスポンスに成功した場合

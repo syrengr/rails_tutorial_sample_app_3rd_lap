@@ -51,10 +51,6 @@ RSpec.describe "Microposts", type: :request do
 
   # 間違ったuserによるmicropost削除に対してテストする
   context "when logged in user tyies to delete another user's micropost" do
-=begin
-    下記エラーの原因を解明できないためコメントアウト
-    NameError:　undefined local variable or method `delete_request' for
-    
     # 遅延評価
     let(:user) { FactoryBot.create(:user) }
     # 前処理
@@ -71,6 +67,5 @@ RSpec.describe "Microposts", type: :request do
       # rootページへリダイレクトすることを期待する
       expect(delete_request).to redirect_to root_url
     end
-=end
   end
 end

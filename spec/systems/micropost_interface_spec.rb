@@ -3,10 +3,6 @@ require "rails_helper"
 
 # マイクロポストのUIに対するテスト
 RSpec.describe "MicropostsInterfaces", type: :system do
-=begin
-  下記エラーの原因を解明できないためコメントアウト
-  NoMethodError: undefined method `+' for {:word_count=>5}:Hash
-
   # Userモデルのファクトリ作成
   let(:user) { FactoryBot.create(:user) }
   # Micropostモデルのファクトリ作成
@@ -78,5 +74,4 @@ RSpec.describe "MicropostsInterfaces", type: :system do
     # リンクが無いことを期待する
     expect(page).not_to have_link "delete"
   end
-=end
 end

@@ -16,14 +16,8 @@ RSpec.describe "Users", type: :request do
         password: "",
         password_confirmation: "",
       } }
-=begin
-      下記エラーの原因を解決できないためコメントアウト
-      Expected response to be a redirect to <http://www.example.com/users/1> but was a redirect to <http://www.example.com/login>.
-      Expected "http://www.example.com/users/1" to be === "http://www.example.com/login".
-
       # userページへリダイレクトすることを期待する
       expect(response).to redirect_to user_path(user)
-=end
     end
   end
 

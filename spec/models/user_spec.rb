@@ -94,13 +94,8 @@ RSpec.describe User, type: :model do
 
   # authenticated?メソッドを検証する
   it "returns false for a user with nil digest" do
-=begin
-    下記エラーの原因を解明できないためコメントアウト
-    NameError:　undefined local variable or method `user' for #<RSpec::ExampleGroups::User:0x00007f9c0a559328>
-    
     # authenticated?メソッドの戻り値がfalsyであることを期待する
     expect(user.authenticated?(:remember, "")).to be_falsy
-=end
   end
 
   # dependent: :destroyのテスト
