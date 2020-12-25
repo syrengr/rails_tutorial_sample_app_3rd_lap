@@ -24,7 +24,6 @@ RSpec.describe "sessions", type: :system do
     end
     # 処理を変数に置き換える
     subject { page }
-
     # loginリンクを検証する
     it "log in" do
       # 現在のパスがuserであることを期待する
@@ -38,7 +37,6 @@ RSpec.describe "sessions", type: :system do
       # 指定のリンクを所持していることを期待する
       is_expected.to have_link "Log out", href: logout_path
     end
-
     # logoutリンクを検証する
     it "log out after log in" do
 =begin
@@ -84,18 +82,6 @@ RSpec.describe "sessions", type: :system do
         # have_selectorのtextオプションでコンテンツ内容がマッチしていないことを検証する
         is_expected.to_not have_selector(".alert-danger", text: "Invalid email/password combination")
       end
-    end
-  end
-
-  # [remember me]チェックボックスのテスト
-  describe "remember me" do
-    # userを定義する
-    let!(:user) do
-      # nameからpassword_confirmationのバリューをuserキーに代入する
-      create(:user, name:                  "ORIGINAL",
-                    email:                 "ORIGINAL@EXAMPLE.COM",
-                    password:              "password",
-                    password_confirmation: "password" )
     end
   end
 end

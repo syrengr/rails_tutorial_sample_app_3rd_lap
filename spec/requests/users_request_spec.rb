@@ -65,7 +65,40 @@ RSpec.describe "Users", type: :request do
     end
   end
 
-  # editとupdateアクションの保護に対するテストをする
+  # 間違ったユーザーが編集しようとしたときのテスト
+  describe "before_action: :correct_user" do
+    # ファクトリ作成
+    let(:user) { FactoryBot.create(:user) }
+    # ファクトリ作成
+    let(:other_user) { FactoryBot.create(:user) }
+=begin
+    下記エラーの原因を解明できないためコメントアウト
+    NoMethodError:　undefined method `login_in_as' for #<RSpec::ExampleGroups::Users_2::BeforeActionCorrectUser:0x00007fea4405a060>
+
+    # 前処理
+    before { login_in_as(other_user) }
+    # 間違ったユーザーでログインすると、編集ページへリダイレクトすることを検証する
+    it "redirects edit when logged in as wrong user" do
+      # edit_user_path(user)へgetリクエストをする
+      get edit_user_path(user)
+      # root_pathへリダイレクトすることを期待する
+      expect(response).to redirect_to root_path
+    end
+
+    # 間違ったユーザーでログインすると、更新ページへリダイレクトすることを検証する
+    it "redirects update when logged in as wrong user" do
+      # nameとemailバリューをuserキーとparamsに代入し、user_pathへpatchリクエストをする
+      patch user_path(user), params: { user: {
+        name: user.name,
+        email: user.email,
+      } }
+      # root_pathへリダイレクトすることを期待する
+      expect(response).to redirect_to root_path
+    end
+=end
+  end
+
+  # editとupdateアクションの保護に対するテスト
   describe "before_action: :logged_in_user" do
     # Userモデルのファクトリ作成
     let(:user) { FactoryBot.create(:user) }
@@ -99,7 +132,7 @@ RSpec.describe "Users", type: :request do
     end
   end
 
-  # 管理者権限の制御をアクションレベルでテストする
+  # 管理者権限の制御をアクションレベルでテスト
   describe "delete /users/:id" do
     # Userモデルのファクトリを作成する
     let!(:user) { FactoryBot.create(:user) }

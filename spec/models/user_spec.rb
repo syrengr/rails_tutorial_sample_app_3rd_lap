@@ -112,7 +112,6 @@ RSpec.describe User, type: :model do
       # micropostを作成する
       user.microposts.create!(content: "Lorem ipsum")
     end
-
     # userの登録に成功した場合を検証する
     it "succeeds" do
       # 以下の挙動を期待する
@@ -139,6 +138,13 @@ RSpec.describe User, type: :model do
         # truthyを返すことを期待する
         expect(user.following?(other_user)).to be_truthy
       end
+      # followersに対するテスト
+      describe "followers" do
+        # followersに成功した場合を検証する
+        it "succeeds" do
+          expect(other_user.followers.include?(user)).to be_truthy
+        end
+      end
     end
 
     # unfollowテスト
@@ -162,10 +168,8 @@ RSpec.describe User, type: :model do
     
     # ユーザーが他のユーザーをフォローしている場合
     context "when user is following other_user" do
-
       # 前処理
       before { user.active_relationships.create!(followed_id: other_user.id) }
-
       # ユーザーのマイクロポスト内に他のユーザーのマイクロポストが含まれていることを検証する
       it "contains other user's microposts within the user's Micropost" do
         # マイクロポストを取り出す
@@ -174,7 +178,6 @@ RSpec.describe User, type: :model do
           expect(user.feed.include?(post_following)).to be_truthy
         end
       end
-
       # 他のユーザーのマイクロポストにユーザー自身のマイクロポストが含まれていることを検証する
       it "contains the user's own microposts in the user's Micropost" do
         # マイクロポストを取り出す
