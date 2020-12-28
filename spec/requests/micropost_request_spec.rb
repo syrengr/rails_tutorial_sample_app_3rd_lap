@@ -57,7 +57,7 @@ RSpec.describe "Microposts", type: :request do
     before { log_in_as(user) }
 
     # micropost数が変更しない場合を検証する
-    it "doesn't chnage Micropost's count" do
+    it "doesn't change Micropost's count" do
       # micropost数が0件であることを期待する
       expect { delete_request }.to change(Micropost, :count).by(0)
     end

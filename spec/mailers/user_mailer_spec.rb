@@ -1,3 +1,6 @@
+=begin
+メール送信の実装を省いたためコメントアウト
+
 # rails_helperを読み込む
 require "rails_helper"
 
@@ -56,3 +59,5 @@ RSpec.describe UserMailer, type: :mailer do
     end
   end
 end
+
+=end
