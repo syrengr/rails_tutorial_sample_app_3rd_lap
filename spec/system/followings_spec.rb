@@ -1,3 +1,6 @@
+=begin
+メール送信の実装を省いたためコメントアウト
+
 # rails_helperを読み込む
 require "rails_helper"
 
@@ -77,3 +80,5 @@ RSpec.describe "Followings", type: :system do
     end.to change(user.following, :count).by(1)
   end
 end
+
+=end

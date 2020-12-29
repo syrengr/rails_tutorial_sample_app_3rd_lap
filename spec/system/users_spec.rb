@@ -30,9 +30,6 @@ RSpec.describe "users", type: :system do
         # 特定の文字が表示されていることを期待する
         expect(page).to have_selector(".alert-success", text: "Welcome to the Sample App!")
       end
-
-=end
-
     end
 
     # 無効な値が入力されたときに表示されるエラーメッセージのテストをする
@@ -68,6 +65,9 @@ RSpec.describe "users", type: :system do
         # 今いるページのURLがsignupであることを期待する
         is_expected.to have_current_path "/signup"
       end
+
+=end
+
     end
   end
 end
