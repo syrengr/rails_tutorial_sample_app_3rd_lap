@@ -53,6 +53,10 @@ RSpec.describe "Microposts", type: :request do
   context "when logged in user tyies to delete another user's micropost" do
     # 遅延評価
     let(:user) { FactoryBot.create(:user) }
+    # 遅延評価
+    let!(:micropost) { FactoryBot.create(:micropost) }
+    # 遅延評価
+    let(:delete_request) { delete micropost_path(micropost) }
     # 前処理
     before { log_in_as(user) }
 
