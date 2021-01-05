@@ -1,6 +1,3 @@
-=begin
-メール送信の実装を省いたためコメントアウト
-
 # rails_helperを読み込む
 require "rails_helper"
 
@@ -78,5 +75,3 @@ RSpec.describe "MicropostsInterfaces", type: :system do
     expect(page).not_to have_link "delete"
   end
 end
-
-=end

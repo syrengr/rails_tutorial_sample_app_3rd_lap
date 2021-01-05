@@ -2,7 +2,7 @@
 require "rails_helper"
 
 # sessionsのテストをする
-RSpec.describe "Sessions", type: :system do
+RSpec.describe "sessions", type: :system do
   # 前処理
   before do
     # loginページを開く
@@ -39,19 +39,11 @@ RSpec.describe "Sessions", type: :system do
     end
     # logoutリンクを検証する
     it "log out after log in" do
-      # Accountフォームへの入力をシュミレートする
-      click_link "Account"
-      # Log outフォームへの入力をシュミレートする
-      click_link "Log out"
-      # 現在のpathがroot_pathであることを期待する
-      is_expected.to have_current_path root_path
-      # login_pathのリンクが"Log in"であることを期待する
-      is_expected.to have_link "Log in", href: login_path
-      # "Account"リンクがあることを期待する
+      # "Account"リンクがあることを検証する
       is_expected.to_not have_link "Account"
-      # logout_pathのリンクがnilではないことを期待する
+      # logoutパスのリンクがnilではないことを検証する
       is_expected.to_not have_link nil, href: logout_path
-      # user_pathのリンクがnilではないことを期待する
+      # userパスのリンクがnilではないことを検証する
       is_expected.to_not have_link nil, href: user_path(user)
     end
   end
