@@ -39,11 +39,19 @@ RSpec.describe "sessions", type: :system do
     end
     # logoutリンクを検証する
     it "log out after log in" do
+      # Accountフォームへの入力をシュミレートする
+      click_link "Account"
+      # Log outフォームへの入力をシュミレートする
+      click_link "Log out"
+      # 現在のpathがroot_pathであることを期待する
+      is_expected.to have_current_path root_path
+      # login_pathのリンクが"Log in"であることを期待する
+      is_expected.to have_link "Log in", href: login_path
       # "Account"リンクがあることを検証する
       is_expected.to_not have_link "Account"
-      # logoutパスのリンクがnilではないことを検証する
+      # logout_pathのリンクがnilではないことを期待する
       is_expected.to_not have_link nil, href: logout_path
-      # userパスのリンクがnilではないことを検証する
+      # user_pathのリンクがnilではないことを期待する
       is_expected.to_not have_link nil, href: user_path(user)
     end
   end
