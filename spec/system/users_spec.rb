@@ -59,14 +59,12 @@ RSpec.describe "users", type: :system do
         # have_selectorのtextオプションでコンテンツ内容がマッチすることを期待する
         is_expected.to have_selector("#error_explanation")
         # have_selectorのtextオプションでコンテンツ内容がマッチすることを期待する
-        is_expected.to have_selector(".alert-danger", text: "The from contains 6 errors.")
-        # エラー文が2回表示されることを期待する
-        is_expected.to have_content("Password can't be blank", count: 2)
+        is_expected.to have_selector(".alert-danger", text: "The form contains 4 errors.")
       end
       # 今いるページのURLの検証をする
       it "render to /signup url" do
-        # 今いるページのURLがsignupであることを期待する
-        is_expected.to have_current_path "/signup"
+        # 今いるページのURLがusersであることを期待する
+        is_expected.to have_current_path "/users"
       end
     end
   end
