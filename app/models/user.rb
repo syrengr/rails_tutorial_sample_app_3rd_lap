@@ -125,7 +125,7 @@ class User < ApplicationRecord
     following << other_user
   end
 
-  # ユーザーをフォロー解除する
+  # ユーザーのフォローを解除する
   def unfollow(other_user)
     # Relationshipモデルのother_user.idを削除する
     active_relationships.find_by(followed_id: other_user.id).destroy

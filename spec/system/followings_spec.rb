@@ -11,7 +11,7 @@ RSpec.describe "Followings", type: :system do
   before do
     # ファクトリを取り出す
     other_users[0..9].each do |other_user|
-      # followed_id作成
+      # followed_id作成（ユーザーのフォローを解除する）
       user.active_relationships.create!(followed_id: other_user.id)
       # follower_id作成
       user.passive_relationships.create!(follower_id: other_user.id)
@@ -45,7 +45,7 @@ RSpec.describe "Followings", type: :system do
     end
   end
 
-  # フォロー数が-1件増加するテスト
+  # フォロー数が1件減少するテスト
   scenario "When user clicks on Unfollow, the number of following increases by -1" do
     # userページを開く
     visit user_path(other_users.first.id)
@@ -57,7 +57,7 @@ RSpec.describe "Followings", type: :system do
       expect(page).not_to have_link "Unfollow"
       # currentページを開く
       visit current_path
-    # フォロー数が-1件増加することを期待する
+    # フォロー数が1件減少することを期待する
     end.to change(user.following, :count).by(-1)
   end
 

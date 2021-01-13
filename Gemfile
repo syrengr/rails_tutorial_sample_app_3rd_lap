@@ -32,6 +32,8 @@ group :development, :test do
   gem 'factory_bot_rails'
   # バリデーションテスト用ツール
   gem 'shoulda-matchers'
+  # デバックツール
+  gem "pry-rails"
 end
 
 group :development do

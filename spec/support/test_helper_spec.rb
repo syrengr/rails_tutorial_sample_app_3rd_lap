@@ -25,9 +25,9 @@ module SystemHelper
     # loginページを開く
     visit login_path
     # Emailフォームへの入力をシュミレートする
-    fill_in "Email",    with: "example@railstutorial.org"
+    fill_in "Email",    with: "user_94@example.com"
     # Passwordフォームへの入力をシュミレートする
-    fill_in "Password", with: "foobar"
+    fill_in "Password", with: "password"
     # Log inボタンへのクリックをシュミレートする
     click_button "Log in"
   end
