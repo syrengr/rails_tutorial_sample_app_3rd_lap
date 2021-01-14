@@ -34,6 +34,7 @@ RSpec.describe "Followings", type: :system do
       expect(page).to have_link u.name, href: user_path(u)
     end
 
+    # フォロー数が変動しないテスト
     # ボタンへのクリックをシュミレート
     click_on "followers"
     # フォロー数が10件であることを期待する
@@ -43,10 +44,8 @@ RSpec.describe "Followings", type: :system do
       # userページ内にリンクと名前が含まれることを期待する
       expect(page).to have_link u.name, href: user_path(u)
     end
-  end
 
-  # フォロー数が1件減少するテスト
-  scenario "When user clicks on Unfollow, the number of following increases by -1" do
+    # フォロー数が1件減少するテスト
     # userページを開く
     visit user_path(other_users.first.id)
     # 下記の挙動を期待する
@@ -59,10 +58,8 @@ RSpec.describe "Followings", type: :system do
       visit current_path
     # フォロー数が1件減少することを期待する
     end.to change(user.following, :count).by(-1)
-  end
 
-  # フォロワー数が1件増加するテスト
-  scenario "When user clicks on Follow, the number of following increases by 1" do
+    # フォロワー数が1件増加するテスト
     # userページを開く
     visit user_path(other_users.last.id)
     # 下記の挙動を期待する
