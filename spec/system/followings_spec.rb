@@ -21,7 +21,7 @@ RSpec.describe "Followings", type: :system do
   end
 
   # フォローとフォロワーの数が正しい場合のテスト
-  scenario "The number of following and followers is correct" do
+  it "The number of following and followers is correct" do
     # ボタンへのクリックをシュミレート
     click_on "following"
     # フォロー数が10件であることを期待する

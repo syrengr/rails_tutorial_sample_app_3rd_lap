@@ -10,11 +10,13 @@ RSpec.describe "UsersEdits", type: :system do
     # 編集の失敗に対するテスト用メソッドを呼び出す
     login_as(user)
     # ボタンへのクリックをシュミレートする
-    click_on "Setting"
+    click_on "Account"
+    # ボタンへのクリックをシュミレートする
+    click_on "Settings"
   end
 
   # 編集の失敗に対するテスト
-  scenario "it fails edit with wrong information" do
+  it "it fails edit with wrong information" do
     # Nameフォームへの入力
     fill_in "Name",                   with: ""
     # Emailフォームへの入力
@@ -37,7 +39,7 @@ RSpec.describe "UsersEdits", type: :system do
   end
 
   # 編集の成功に対するテスト
-  scenario "it succeeds edit with correct information" do
+  it "it succeeds edit with correct information" do
     # Nameフォームへの入力
     fill_in "Name",                     with: "Foo Bar"
     # Emailフォームへの入力

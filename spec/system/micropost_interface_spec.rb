@@ -7,7 +7,6 @@ RSpec.describe "MicropostsInterfaces", type: :system do
   let(:user) { FactoryBot.create(:user) }
   # Micropostモデルのファクトリ作成
   let(:micropost) { FactoryBot.create(:micropost) }
-
   # 前処理
   before do
     # 34個のマイクロポスト作成
@@ -17,12 +16,12 @@ RSpec.describe "MicropostsInterfaces", type: :system do
       # マイクロポスト作成
       user.microposts.create!(content: content)
     end
+    # メソッド呼び出し
+    login_as(user)
   end
 
   # UIテスト
   scenario "micropost interface" do
-    # メソッド呼び出し
-    login_as(user)
     # ボタンへのクリックをシュミレート
     click_on "Home"
 
