@@ -10,7 +10,9 @@ FactoryBot.define do
     password { "password" }
     # passwordの確認用テストデータを作成する
     password_confirmation { "password" }
+    # テスト時のサンプルとユーザーを事前に有効化する
     activated { true }
+    # サーバーのタイムゾーンに応じたタイムスタンプを返す
     activated_at { Time.zone.now }
 
     # 管理者権限の制御テスト用データ

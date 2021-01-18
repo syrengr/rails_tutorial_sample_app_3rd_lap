@@ -11,7 +11,9 @@ RSpec.describe "AccountActivations", type: :request do
     before do
       # edit_account_activationページへアクセスする
       get edit_account_activation_path(
+        # アクセス情報
         user.activation_token,
+        # アクセス情報
         email: "wrong",
       )
     end
@@ -31,7 +33,9 @@ RSpec.describe "AccountActivations", type: :request do
     before do
       # edit_account_activationページへアクセスする
       get edit_account_activation_path(
+        # アクセス情報
         "wrong",
+        # アクセス情報
         email: user.email,
       )
     end
@@ -51,7 +55,9 @@ RSpec.describe "AccountActivations", type: :request do
     before do
       # edit_account_activationページへアクセスする
       get edit_account_activation_path(
+        # アクセス情報
         user.activation_token,
+        # アクセス情報
         email: user.email,
       )
     end

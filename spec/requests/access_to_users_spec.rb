@@ -3,6 +3,7 @@ require "rails_helper"
 
 # usersコントローラーのテスト
 RSpec.describe "access to users", type: :request do
+  # createメソッドのテスト
   describe "POST #create" do
 
 =begin

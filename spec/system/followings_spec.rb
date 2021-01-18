@@ -15,11 +15,9 @@ RSpec.describe "Followings", type: :system do
       user.active_relationships.create!(followed_id: other_user.id)
       # follower_id作成
       user.passive_relationships.create!(follower_id: other_user.id)
-    # end以下スコープ外
     end
     # login_asメソッドを呼び出す
     login_as(user)
-  # end以下スコープ外
   end
 
   # フォローとフォロワーの数が正しい場合のテスト

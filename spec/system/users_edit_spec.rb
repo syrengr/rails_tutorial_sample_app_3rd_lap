@@ -9,6 +9,7 @@ RSpec.describe "UsersEdits", type: :system do
   before do
     # 編集の失敗に対するテスト用メソッドを呼び出す
     login_as(user)
+    # ボタンへのクリックをシュミレートする
     click_on "Setting"
   end
 

@@ -10,7 +10,7 @@ RSpec.describe "MicropostsInterfaces", type: :system do
 
   # 前処理
   before do
-    # 繰り返し処理
+    # 34個のマイクロポスト作成
     34.times do
       # ダミーデータ生成
       content = Faker::Lorem.sentence(word_count: 5)
