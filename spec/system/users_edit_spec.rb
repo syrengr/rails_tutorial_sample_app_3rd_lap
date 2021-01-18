@@ -27,8 +27,6 @@ RSpec.describe "UsersEdits", type: :system do
     fill_in "Confirmation",           with: "bar"
     # ボタンへのクリックをシュミレートする
     click_on "Save changes"
-    # 正しい数のエラーメッセージが表示されていることを期待する
-    is_expected.to have_selector("The form contains 4 errors.")
     # 正しい数のエラーが表示されているか検証する
     aggregate_failures do
       # 現在いる場所とuserがいる場所が一致することを期待する
