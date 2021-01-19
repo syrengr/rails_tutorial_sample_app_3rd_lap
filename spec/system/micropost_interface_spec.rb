@@ -10,9 +10,9 @@ RSpec.describe "MicropostsInterfaces", type: :system do
   # 前処理
   before do
     # 34個のマイクロポスト作成
-    34.times do
-      # ダミーデータ生成
-      content = Faker::Lorem.sentence(word_count: 5)
+    50.times do
+      # ダミーデータ作成
+      content = Faker::Lorem.sentence(5)
       # マイクロポスト作成
       user.microposts.create!(content: content)
     end
@@ -31,6 +31,8 @@ RSpec.describe "MicropostsInterfaces", type: :system do
     expect(has_css?('.alert-danger')).to be_truthy
 
     # ボタンへのクリックをシュミレート
+    click_on "Home"
+    # ボタンへのクリックをシュミレート
     click_on "2"
     # 静的解析
     expect(URI.parse(current_url).query).to eq "page=2"
@@ -40,7 +42,7 @@ RSpec.describe "MicropostsInterfaces", type: :system do
     # フォームへの入力をシュミレートする
     fill_in "micropost_content", with: valid_content
     # 画像をアップロードするためのテスト
-    attach_file "micropost[image]", "#{Rails.root}/spec/fixtures/kitten.jpg"
+    attach_file "micropost_picture", "#{Rails.root}/app/assets/images/kitten.jpg"
     # 以下の挙動を期待する
     expect do
       # ボタンへのクリックをシュミレートする
