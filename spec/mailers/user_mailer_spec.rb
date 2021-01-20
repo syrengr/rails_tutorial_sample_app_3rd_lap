@@ -40,11 +40,11 @@ RSpec.describe UserMailer, type: :mailer do
     # headersをレンダリングする
     it "renders the headers" do
       # mail.subject
-      expect(mail.subject).to eq("Paasword reset")
-      # mail.so
-      expect(mail.so).to eq([user.email])
+      expect(mail.subject).to eq("Password reset")
+      # mail.to
+      expect(mail.to).to eq([user.email])
       # mail.from
-      expect(mail.from).to eq("noreply@example.com")
+      expect(mail.from).to eq(["noreply@example.com"])
     end
 
     # bodyをレンダリングする

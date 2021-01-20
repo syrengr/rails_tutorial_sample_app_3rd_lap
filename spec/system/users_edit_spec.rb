@@ -52,7 +52,7 @@ RSpec.describe "UsersEdits", type: :system do
     aggregate_failures do
       # 現在いる場所とuserがいる場所が一致することを期待する
       expect(current_path).to eq user_path(user)
-      # エラーが表示されることを期待する
+      # 指定のCSSがありtruthyを返すことを期待する
       expect(has_css?(".alert-success")).to be_truthy
     end
   end

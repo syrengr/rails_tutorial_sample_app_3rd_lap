@@ -23,8 +23,8 @@ RSpec.describe "access to users", type: :request do
         before { post signup_path, params: { user: attributes_for(:user) } }
         # 処理を変数に置き換える
         subject { response }
-        # userページへリダイレクトすることを期待する
-        it { is_expected.to redirect_to user_path(User.last) }
+        # rootページへリダイレクトすることを期待する
+        it { is_expected.to redirect_to root_path }
         # status code 302が返却されることを期待する
         it { is_expected.to have_http_status 302 }
       end

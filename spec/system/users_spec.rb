@@ -25,7 +25,7 @@ RSpec.describe "users", type: :system do
       # フラッシュメッセージが表示される
       it "gets an flash message" do
         # 特定の文字が表示されていることを期待する
-        expect(page).to have_selector(".alert-success", text: "Welcome to the Sample App!")
+        expect(page).to have_content("Please check your email to activate your account.")
       end
     end
 
