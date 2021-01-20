@@ -158,9 +158,6 @@ RSpec.describe "Users", type: :request do
     end
   end
 
-=begin
-メール送信の実装を省いたためコメントアウト
-
   # user登録にテストにアカウント有効化を追加する
   describe "POST /users" do
     # Userモデルのファクトリを作成する
@@ -184,7 +181,4 @@ RSpec.describe "Users", type: :request do
       end
     end
   end
-
-=end
-
 end

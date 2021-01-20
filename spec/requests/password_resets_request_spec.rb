@@ -38,9 +38,6 @@ RSpec.describe "PasswordResets", type: :request do
       end
     end
 
-=begin
-メール送信の実装を省いたためコメントアウト
-
     # emailが有効な場合を検証する
     it "succeds create with valid email" do
       # password_resetを登録する
@@ -53,9 +50,6 @@ RSpec.describe "PasswordResets", type: :request do
         expect(ActionMailer::Base.deliveries.size).to eq 1
       end
     end
-
-=end
-
   end
 
   # editアクションのテスト

@@ -5,10 +5,6 @@ require "rails_helper"
 RSpec.describe "access to users", type: :request do
   # createメソッドのテスト
   describe "POST #create" do
-
-=begin
-メール送信の実装を省いたためコメントアウト
-
     # 有効なリクエストのテスト
     context "valid request" do
       # ユーザーを追加することを検証する
@@ -33,8 +29,6 @@ RSpec.describe "access to users", type: :request do
         it { is_expected.to have_http_status 302 }
       end
     end
-
-=end
 
     # 無効なリクエストのテスト
     context "invalid request" do

@@ -3,6 +3,7 @@ require "rails_helper"
 
 # usersのテスト
 RSpec.describe "users", type: :system do
+  # 新規登録のテストをする
   describe "user create a new account" do
     # 有効な値が入力されたときに表示されるフラッシュメッセージのテストをする
     context "enter an valid values" do
@@ -21,18 +22,11 @@ RSpec.describe "users", type: :system do
         # ボタンへのクリックをシュミレートする
         click_button "Create my account"
       end
-
-=begin
-メール送信の実装を省いたためコメントアウト
-
       # フラッシュメッセージが表示される
       it "gets an flash message" do
         # 特定の文字が表示されていることを期待する
         expect(page).to have_selector(".alert-success", text: "Welcome to the Sample App!")
       end
-
-=end
-
     end
 
     # 無効な値が入力されたときに表示されるエラーメッセージのテストをする
